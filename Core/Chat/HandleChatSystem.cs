@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ChatPlus.Common.Configs;
 using ChatPlus.Core.Features.BoldText;
 using ChatPlus.Core.Helpers;
@@ -7,6 +8,9 @@ using ReLogic.OS;
 using Terraria;
 using Terraria.GameInput;
 using Terraria.ModLoader;
+using Terraria.UI.Chat;
+using Terraria.WorldBuilding;
+using static System.Net.Mime.MediaTypeNames;
 using static ChatPlus.Common.Configs.Config;
 
 namespace ChatPlus.Core.Chat
@@ -20,7 +24,7 @@ namespace ChatPlus.Core.Chat
     public class HandleChatSystem : ModSystem
     {
         // Variables
-        private static int caretPos;
+        internal static int caretPos;
         private static bool selectAll;
         private static int selectionAnchor = -1; // -1 = no selection
         public static (int start, int end)? GetSelection()
@@ -119,8 +123,8 @@ namespace ChatPlus.Core.Chat
             HandleClipboardKeys();
             HandleCtrlAPressed();
             HandleCtrlBPressed();
-            HandleCtrlIPressed(); 
-            HandleCtrlUPressed(); 
+            HandleCtrlIPressed();
+            HandleCtrlUPressed();
             HandleTabKeyPressed();
             HandleBackKeyPressed();
 
@@ -387,6 +391,9 @@ namespace ChatPlus.Core.Chat
                 return;
             }
 
+            // Populate text snippets in our text and get the neighboring snippets
+            GetNeighboringSnippets(out TextSnippet leftSnippet, out TextSnippet rightSnippet);
+
             if (Main.keyState.IsKeyDown(Keys.Left))
             {
                 _leftArrowHoldFrames++;
@@ -402,7 +409,7 @@ namespace ChatPlus.Core.Chat
                     else if (caretPos > 0)
                     {
                         int oldCaret = caretPos;
-                        caretPos = ctrl ? MoveCaretWordLeft(caretPos, Main.chatText) : caretPos - 1;
+                        caretPos = ctrl ? MoveCaretWordLeft(caretPos, Main.chatText) : MoveCaretLeft(caretPos, Main.chatText, leftSnippet);
 
                         if (shift)
                         {
@@ -429,7 +436,7 @@ namespace ChatPlus.Core.Chat
                     else if (caretPos < Main.chatText.Length)
                     {
                         int oldCaret = caretPos;
-                        caretPos = ctrl ? MoveCaretWordRight(caretPos, Main.chatText) : caretPos + 1;
+                        caretPos = ctrl ? MoveCaretWordRight(caretPos, Main.chatText) : MoveCaretRight(caretPos, Main.chatText, rightSnippet);
 
                         if (shift)
                         {
@@ -458,12 +465,29 @@ namespace ChatPlus.Core.Chat
                     }
                     else if (caretPos > 0)
                     {
-                        Main.chatText = Main.chatText.Remove(caretPos - 1, 1);
+                        Main.chatText = RemoveTextFrom(caretPos, Main.chatText);
                         caretPos--;
                     }
                 }
             }
             else _backspaceHoldFrames = 0;
+        }
+
+        private string RemoveTextFrom(int pos, string text)
+        {
+            GetNeighboringSnippets(out TextSnippet leftSnippet, out _);
+
+            // We want to remove the entire snippet if it's set to DeleteWhole, like vanilla does
+            if (leftSnippet != null && leftSnippet.DeleteWhole)
+            {
+                // Cursor must be moved first
+                caretPos = Math.Max(0, caretPos - leftSnippet.TextOriginal.Length);
+                text = text.Remove(caretPos, leftSnippet.TextOriginal.Length);
+                caretPos++; // Correct positioning
+            }
+            else text = text.Remove(caretPos - 1, 1);
+
+            return text;
         }
 
         private int MoveCaretWordLeft(int pos, string text)
@@ -482,6 +506,55 @@ namespace ChatPlus.Core.Chat
             while (i < text.Length && !char.IsWhiteSpace(text[i])) i++;
             while (i < text.Length && char.IsWhiteSpace(text[i])) i++;
             return i;
+        }
+
+        private int MoveCaretLeft(int pos, string text, TextSnippet leftSnippet)
+        {
+            if (leftSnippet != null && leftSnippet.DeleteWhole) pos -= leftSnippet.TextOriginal.Length;
+            else pos -= 1;
+            return pos;
+        }
+
+        private int MoveCaretRight(int pos, string text, TextSnippet rightSnippet)
+        {
+            if (rightSnippet != null && rightSnippet.DeleteWhole) pos += rightSnippet.TextOriginal.Length;
+            else pos += 1;
+            return pos;
+        }
+
+        private void GetNeighboringSnippets(out TextSnippet? leftSnippet, out TextSnippet? rightSnippet)
+        {
+            leftSnippet = null;
+            rightSnippet = null;
+            List<TextSnippet> snippets = ChatManager.ParseMessage(Main.chatText, Color.White);
+            int[] snippetIndexes = new int[snippets.Count];
+            string chatText = Main.chatText;
+            int removedChars = 0;
+            for (int i = 0; i < snippets.Count; i++)
+            {
+                snippetIndexes[i] = chatText.IndexOf(snippets[i].TextOriginal) + removedChars;
+                chatText = chatText.Substring(snippets[i].TextOriginal.Length);
+                removedChars = Main.chatText.Length - chatText.Length;
+            }
+
+            // Determine which snippets are to the left and right of the cursor
+            for (int i = 0; i < snippets.Count; i++)
+            {
+                if (snippetIndexes[i] == caretPos - snippets[i].TextOriginal.Length)
+                {
+                    leftSnippet = snippets[i];
+                    break;
+                }
+            }
+
+            for (int i = 0; i < snippets.Count; i++)
+            {
+                if (snippetIndexes[i] == caretPos)
+                {
+                    rightSnippet = snippets[i];
+                    break;
+                }
+            }
         }
     }
 }
