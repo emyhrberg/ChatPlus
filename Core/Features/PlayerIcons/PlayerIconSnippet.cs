@@ -10,8 +10,7 @@ using Terraria.ModLoader;
 using Terraria.UI;
 using Terraria.UI.Chat;
 
-namespace ChatPlus.Core.Features.PlayerIcons
-;
+namespace ChatPlus.Core.Features.PlayerIcons;
 
 /// <summary>
 /// Inline snippet that draws a player's head icon.

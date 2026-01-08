@@ -17,6 +17,10 @@ using Terraria;
 using Terraria.UI;
 
 namespace ChatPlus.Core.Misc;
+
+/// <summary>
+/// Provides centralized management and coordination of UI state systems for chat-related features.
+/// </summary>
 public class StateManager
 {
     public CommandSystem CommandSystem { get; }

@@ -3,7 +3,6 @@ using ChatPlus.Core.Features.Stats.Base;
 using ChatPlus.Core.Features.Uploads;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.ModLoader;
-using Terraria.UI; 
 
 namespace ChatPlus.Core.Features.Stats.UploadStats;
 public class UploadInfoState : BaseInfoState, ILoadable

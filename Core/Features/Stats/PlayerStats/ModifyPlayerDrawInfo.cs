@@ -1,8 +1,4 @@
-﻿
-using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.DataStructures;
-using Terraria.GameContent;
+﻿using Terraria.DataStructures;
 using Terraria.ModLoader;
 
 namespace ChatPlus.Core.Features.Stats.PlayerStats;

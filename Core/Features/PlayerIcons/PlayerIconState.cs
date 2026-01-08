@@ -1,8 +1,7 @@
-using ChatPlus.Core.Features.PlayerIcons
-;
 using ChatPlus.Core.UI;
 using Microsoft.Xna.Framework.Graphics;
-using Terraria;
+
+namespace ChatPlus.Core.Features.PlayerIcons;
 
 public class PlayerIconState : BaseState<PlayerIcon>
 {

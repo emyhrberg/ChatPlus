@@ -5,8 +5,7 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.UI;
 
-namespace ChatPlus.Core.Features.PlayerIcons
-;
+namespace ChatPlus.Core.Features.PlayerIcons;
 
 [Autoload(Side = ModSide.Client)]
 public class PlayerIconSystem : ModSystem

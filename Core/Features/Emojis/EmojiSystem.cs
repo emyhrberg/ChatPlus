@@ -5,65 +5,64 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.UI;
 
-namespace ChatPlus.Core.Features.Emojis
+namespace ChatPlus.Core.Features.Emojis;
+
+[Autoload(Side = ModSide.Client)]
+public class EmojiSystem : ModSystem
 {
-    [Autoload(Side = ModSide.Client)]
-    public class EmojiSystem : ModSystem
+    public UserInterface ui;
+    public EmojiState state;
+
+    public override void PostSetupContent()
     {
-        public UserInterface ui;
-        public EmojiState state;
+        ui = new UserInterface();
+        state = new EmojiState();
+        ui.SetState(null); // start hidden
+    }
 
-        public override void PostSetupContent()
+    public static bool OpenedFromColon { get; private set; }
+
+    public override void UpdateUI(GameTime gameTime)
+    {
+        if (!Main.drawingPlayerChat)
         {
-            ui = new UserInterface();
-            state = new EmojiState();
-            ui.SetState(null); // start hidden
+            ui?.SetState(null);
+            return;
         }
 
-        public static bool OpenedFromColon { get; private set; }
+        string text = Main.chatText ?? string.Empty;
+        int caret = text.Length;
 
-        public override void UpdateUI(GameTime gameTime)
-        {
-            if (!Main.drawingPlayerChat)
+        var unclosedTag = ChatTriggers.UnclosedTag("[e");
+        var colonWord = ChatTriggers.CharOutsideTags(':');
+
+        // Colon mode only if ':' is active and an [e tag is NOT active
+        OpenedFromColon = colonWord.ShouldOpen(text, caret) && !unclosedTag.ShouldOpen(text, caret);
+
+        ChatPlus.StateManager.OpenStateByTriggers(
+            gameTime,
+            ui,
+            state,
+            unclosedTag,
+            colonWord
+        );
+    }
+
+    public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
+    {
+        int index = layers.FindIndex(l => l.Name.Equals("Vanilla: Death Text"));
+        if (index == -1) return;
+
+        layers.Insert(index, new LegacyGameInterfaceLayer(
+            "ChatPlus: Emojis Panel",
+            () =>
             {
-                ui?.SetState(null);
-                return;
-            }
+                if (ui?.CurrentState != null)
+                    ui.Draw(Main.spriteBatch, new GameTime());
 
-            string text = Main.chatText ?? string.Empty;
-            int caret = text.Length;
-
-            var unclosedTag = ChatTriggers.UnclosedTag("[e");
-            var colonWord = ChatTriggers.CharOutsideTags(':');
-
-            // Colon mode only if ':' is active and an [e tag is NOT active
-            OpenedFromColon = colonWord.ShouldOpen(text, caret) && !unclosedTag.ShouldOpen(text, caret);
-
-            ChatPlus.StateManager.OpenStateByTriggers(
-                gameTime,
-                ui,
-                state,
-                unclosedTag,
-                colonWord
-            );
-        }
-
-        public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
-        {
-            int index = layers.FindIndex(l => l.Name.Equals("Vanilla: Death Text"));
-            if (index == -1) return;
-
-            layers.Insert(index, new LegacyGameInterfaceLayer(
-                "ChatPlus: Emojis Panel",
-                () =>
-                {
-                    if (ui?.CurrentState != null)
-                        ui.Draw(Main.spriteBatch, new GameTime());
-
-                    return true;
-                },
-                InterfaceScaleType.UI
-            ));
-        }
+                return true;
+            },
+            InterfaceScaleType.UI
+        ));
     }
 }

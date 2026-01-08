@@ -1,11 +1,12 @@
 ﻿using ChatPlus.Common.Configs;
+using ChatPlus.Core.Features.Stats.PlayerStats.StatsPrivacy;
 using ChatPlus.Core.Misc;
 using System.IO;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ChatPlus.Core.Features.Stats.PlayerStats.StatsPrivacy;
+namespace ChatPlus.Core.Features.Stats.PlayerStats.Privacy;
 
 internal static class PrivacyNetHandler
 {

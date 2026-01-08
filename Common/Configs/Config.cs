@@ -8,6 +8,7 @@ using ChatPlus.Core.Chat.ChatButtons;
 using ChatPlus.Core.Chat.ChatButtons.Shared;
 using ChatPlus.Core.Features.Mentions;
 using ChatPlus.Core.Features.PlayerColors;
+using ChatPlus.Core.Features.Stats.PlayerStats.Privacy;
 using ChatPlus.Core.Features.Stats.PlayerStats.StatsPrivacy;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;

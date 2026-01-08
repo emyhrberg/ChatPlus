@@ -1,5 +1,4 @@
-namespace ChatPlus.Core.Features.PlayerIcons
-;
+namespace ChatPlus.Core.Features.PlayerIcons;
 
 /// <summary>
 /// Represents a player entry that can be inserted into chat as a tag and whose head icon can be drawn.

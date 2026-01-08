@@ -4,8 +4,7 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.UI.Chat;
 
-namespace ChatPlus.Core.Features.PlayerIcons
-;
+namespace ChatPlus.Core.Features.PlayerIcons;
 
 /// <summary>
 /// Maintains a refreshed list of active players for the PlayerIcon UI.

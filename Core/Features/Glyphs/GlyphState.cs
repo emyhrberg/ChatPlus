@@ -2,12 +2,11 @@ using ChatPlus.Core.UI;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.UI;
 
-namespace ChatPlus.Core.Features.Glyphs
+namespace ChatPlus.Core.Features.Glyphs;
+
+public class GlyphState : BaseState<Glyph>
 {
-    public class GlyphState : BaseState<Glyph>
+    public GlyphState() : base(new GlyphPanel(), new DescriptionPanel<Glyph>())
     {
-        public GlyphState() : base(new GlyphPanel(), new DescriptionPanel<Glyph>())
-        {
-        }
     }
 }

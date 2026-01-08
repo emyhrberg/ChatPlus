@@ -4,8 +4,7 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.UI.Chat;
 
-namespace ChatPlus.Core.Features.PlayerIcons
-;
+namespace ChatPlus.Core.Features.PlayerIcons;
 
 /// <summary>
 /// Parses [p:PlayerName] into a <see cref="PlayerIconSnippet"/> showing the player's head.

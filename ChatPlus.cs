@@ -9,7 +9,7 @@ using ChatPlus.Core.Features.Mentions;
 using ChatPlus.Core.Features.ModIcons;
 using ChatPlus.Core.Features.PlayerColors;
 using ChatPlus.Core.Features.PlayerIcons;
-using ChatPlus.Core.Features.Stats.PlayerStats.StatsPrivacy;
+using ChatPlus.Core.Features.Stats.PlayerStats.Privacy;
 using ChatPlus.Core.Features.TypingIndicators;
 using ChatPlus.Core.Features.Uploads;
 using ChatPlus.Core.Misc;

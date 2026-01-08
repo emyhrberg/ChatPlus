@@ -1,11 +1,11 @@
 ﻿using ChatPlus.Common.Configs;
 using ChatPlus.Core.Features.Stats.UploadStats;
-using ChatPlus.Core.Features.Uploads;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ModLoader.UI;
 using Terraria.UI.Chat;
-using static System.Net.Mime.MediaTypeNames;
+
+namespace ChatPlus.Core.Features.Uploads;
 
 public class UploadSnippet : TextSnippet
 {

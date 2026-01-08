@@ -5,7 +5,6 @@ using ChatPlus.Common.Configs;
 using ChatPlus.Core.Features.Stats.ModStats;
 using ChatPlus.Core.Misc;
 using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
 using ReLogic.Graphics;
 using Terraria;
 using Terraria.ModLoader;
