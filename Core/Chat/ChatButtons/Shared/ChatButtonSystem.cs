@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using ChatPlus.Common.Configs;
-using ChatPlus.Core.Helpers;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.UI;

@@ -1,7 +1,7 @@
 ﻿using System;
+using ChatPlus.Common;
 using ChatPlus.Core.Chat;
 using ChatPlus.Core.Features.ModIcons;
-using ChatPlus.Core.Helpers;
 using ChatPlus.Core.UI;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;

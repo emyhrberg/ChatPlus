@@ -1,5 +1,5 @@
 ﻿using System;
-using ChatPlus.Core.Helpers;
+using ChatPlus.Common.Debug;
 using MonoMod.Cil;
 using Terraria.Graphics.Renderers;
 using Terraria.ModLoader;

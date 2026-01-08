@@ -1,7 +1,6 @@
 ﻿using System;
 using ChatPlus.Core.Features.Stats.Base;
 using ChatPlus.Core.Features.Uploads;
-using ChatPlus.Core.Helpers;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.ModLoader;
 using Terraria.UI; 

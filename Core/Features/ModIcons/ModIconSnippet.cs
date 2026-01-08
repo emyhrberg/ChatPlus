@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
+using ChatPlus.Common;
 using ChatPlus.Common.Configs;
 using ChatPlus.Core.Features.Stats.ModStats;
-using ChatPlus.Core.Helpers;
+using ChatPlus.Core.Misc;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using ReLogic.Graphics;

@@ -1,6 +1,4 @@
 ﻿using System;
-using ChatPlus.Core.Helpers;
-using Microsoft.Xna.Framework;
 using Terraria.UI.Chat;
 
 namespace ChatPlus.Core.Features.Mentions;

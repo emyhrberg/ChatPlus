@@ -16,7 +16,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.UI;
 
-namespace ChatPlus.Core.Helpers;
+namespace ChatPlus.Core.Misc;
 public class StateManager
 {
     public CommandSystem CommandSystem { get; }

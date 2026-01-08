@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using ChatPlus.Common.Configs;
-using ChatPlus.Core.Helpers;
+using ChatPlus.Core.Misc;
 using ChatPlus.Core.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

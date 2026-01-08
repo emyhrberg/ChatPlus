@@ -1,12 +1,10 @@
-﻿using ChatPlus.Common.Configs.ConfigElements.Base;
-using ChatPlus.Core.Features.PlayerColors;
-using ChatPlus.Core.Helpers;
+﻿using ChatPlus.Core.Features.PlayerColors;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.UI.Chat;
 
-namespace ChatPlus.Common.Configs.ConfigElements;
+namespace ChatPlus.Common.Configs.ConfigElements.ButtonConfigElements;
 
 public class TypingIndicatorsConfigElement : BaseBoolConfigElement
 {

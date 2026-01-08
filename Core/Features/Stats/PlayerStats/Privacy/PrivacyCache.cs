@@ -1,5 +1,5 @@
 ﻿using ChatPlus.Common.Configs;
-using ChatPlus.Core.Helpers;
+using ChatPlus.Common.Debug;
 using Terraria;
 
 namespace ChatPlus.Core.Features.Stats.PlayerStats.StatsPrivacy;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using ChatPlus.Core.Features.Stats.Base;
-using ChatPlus.Core.Helpers;
+using ChatPlus.Core.Misc;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Graphics;

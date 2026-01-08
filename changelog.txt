@@ -1,4 +1,0 @@
-
-- Added chat buttons
-- Added grid view
-- Added bold, italics and underlined text

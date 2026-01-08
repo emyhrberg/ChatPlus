@@ -1,10 +1,9 @@
-﻿using ChatPlus.Common.Configs.ConfigElements.Base;
-using ChatPlus.Core.Features.ModIcons;
+﻿using ChatPlus.Core.Features.ModIcons;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.GameContent;
 using Terraria.UI.Chat;
 
-namespace ChatPlus.Common.Configs.ConfigElements;
+namespace ChatPlus.Common.Configs.ConfigElements.ButtonConfigElements;
 
 public class ModIconsConfigElement : BaseBoolConfigElement
 {

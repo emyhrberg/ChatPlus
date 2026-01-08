@@ -5,7 +5,7 @@ using System.Linq;
 using Terraria.ModLoader;
 using Terraria.ModLoader.Core;
 
-namespace ChatPlus.Core.Helpers;
+namespace ChatPlus.Core.Misc;
 public static class ModHelper
 {
     public static LocalMod GetLocalMod(Mod mod)

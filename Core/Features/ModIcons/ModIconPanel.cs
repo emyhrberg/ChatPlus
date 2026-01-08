@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ChatPlus.Core.Chat;
 using ChatPlus.Core.Features.Stats.ModStats;
-using ChatPlus.Core.Helpers;
+
 using ChatPlus.Core.UI;
 using Microsoft.Xna.Framework;
 using Terraria;

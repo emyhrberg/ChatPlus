@@ -2,7 +2,7 @@
 using System.Globalization;
 using ChatPlus.Common.Configs.ConfigElements.PlayerColor;
 using ChatPlus.Core.Features.PlayerColors;
-using ChatPlus.Core.Helpers;
+using ChatPlus.Core.Misc;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.OS;

@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using ChatPlus.Common.Debug;
 using ChatPlus.Core.Chat.ChatButtons.Shared;
-using ChatPlus.Core.Helpers;
+using ChatPlus.Core.Misc;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.GameContent;

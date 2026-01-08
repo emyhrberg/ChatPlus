@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using ChatPlus.Common;
 using ChatPlus.Common.Configs;
 using ChatPlus.Core.Features.PlayerColors;
-using ChatPlus.Core.Helpers;
+using ChatPlus.Core.Misc;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.GameContent.UI;
@@ -14,6 +16,7 @@ using Terraria.UI.Chat;
 
 namespace ChatPlus.Core.Features.TypingIndicators;
 
+[Autoload(Side =ModSide.Both)]
 public class TypingIndicatorSystem : ModSystem
 {
     public static Dictionary<int, bool> TypingPlayers = [];
@@ -21,10 +24,7 @@ public class TypingIndicatorSystem : ModSystem
     // the fade value goes from 0 to 6 (6 frames to fully appear, 6 frames to fully disappear)
     private static readonly int[] fade = new int[Main.maxPlayers];
 
-    /// <summary>
     /// Draws the chat bubble above the players
-    /// </summary>
-    /// <param name="sb"></param>
     public override void PostDrawInterface(SpriteBatch sb)
     {
         if (!Conf.C.TypingIndicators) return;
@@ -123,9 +123,7 @@ public class TypingIndicatorSystem : ModSystem
         }
     }
 
-    /// <summary>
     /// Draws the chat bubble just below the chat box
-    /// </summary>
     public static void DrawTypingLine(int yOffset=0)
     {
         if (!Conf.C.TypingIndicators) return;

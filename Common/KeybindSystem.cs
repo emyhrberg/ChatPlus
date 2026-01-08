@@ -8,7 +8,7 @@ using Terraria;
 using Terraria.GameInput;
 using Terraria.ModLoader;
 
-namespace ChatPlus.Common.Keybinds
+namespace ChatPlus.Common
 {
     public class KeybindSystem : ModSystem
     {
@@ -16,20 +16,11 @@ namespace ChatPlus.Common.Keybinds
         public static ModKeybind EmojiKB;
         public static ModKeybind UploadsKB;
 
-#if DEBUG
-        public static ModKeybind WriteLineCount;
-#endif
-        
-
         public override void Load()
         {
             CommandKB = KeybindLoader.RegisterKeybind(Mod, "Open Command Window", Keys.C);
             EmojiKB = KeybindLoader.RegisterKeybind(Mod, "Open Emoji Window", Keys.Y);
             UploadsKB = KeybindLoader.RegisterKeybind(Mod, "Open Upload Window", Keys.U);
-
-#if DEBUG
-            WriteLineCount = KeybindLoader.RegisterKeybind(Mod, "DEBUG: Write Chat Line Count", Keys.L);
-#endif
         }
     }
 
@@ -37,17 +28,6 @@ namespace ChatPlus.Common.Keybinds
     {
         public override void ProcessTriggers(TriggersSet t)
         {
-#if DEBUG
-            if (KeybindSystem.WriteLineCount.JustPressed)
-            {
-                int count = 10;
-                for (int i = 0; i < count; i++)
-                {
-                    Main.NewText($"Line count: {ChatScrollList.GetTotalLines()}");
-                }
-            }
-#endif
-
             static void Open<TSystem>(ModKeybind keybind, TSystem sys, string prefix) where TSystem : ModSystem
             {
                 if (!keybind.JustPressed)

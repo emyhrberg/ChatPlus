@@ -10,7 +10,7 @@ using ChatPlus.Core.Features.Mentions;
 using ChatPlus.Core.Features.ModIcons;
 using ChatPlus.Core.Features.PlayerIcons;
 using ChatPlus.Core.Features.Uploads;
-using ChatPlus.Core.Helpers;
+
 using Terraria;
 using static ChatPlus.Common.Configs.Config;
 

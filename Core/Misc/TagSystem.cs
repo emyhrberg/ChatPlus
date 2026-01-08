@@ -6,11 +6,10 @@ using ChatPlus.Core.Features.ModIcons;
 using ChatPlus.Core.Features.PlayerIcons;
 using ChatPlus.Core.Features.UnderlineText;
 using ChatPlus.Core.Features.Uploads;
-using ChatPlus.Core.Helpers;
 using Terraria.ModLoader;
 using Terraria.UI.Chat;
 
-namespace ChatPlus.Core.Systems;
+namespace ChatPlus.Core.Misc;
 
 internal class TagSystem : ModSystem
 {

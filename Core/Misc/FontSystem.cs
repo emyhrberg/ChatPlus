@@ -9,7 +9,7 @@ using Terraria.GameContent;
 using Terraria.ModLoader;
 using static ReLogic.Graphics.DynamicSpriteFont;
 
-namespace ChatPlus.Core.Systems;
+namespace ChatPlus.Core.Misc;
 
 /// <summary>
 /// Automatically initializes fonts in Assets/Fonts folder.

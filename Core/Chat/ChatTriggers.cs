@@ -1,7 +1,7 @@
 ﻿using System;
 using ChatPlus.Common.Configs;
 
-namespace ChatPlus.Core.Helpers;
+namespace ChatPlus.Core.Chat;
 
 public interface ITrigger
 {

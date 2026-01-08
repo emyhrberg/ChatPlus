@@ -1,4 +1,3 @@
-using ChatPlus.Common.Configs.ConfigElements.Base;
 using ChatPlus.Core.Chat.ChatButtons.Shared;
 using Microsoft.Xna.Framework.Graphics;
 

@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 using System.Text.Json;
 using ChatPlus.Common.Configs;
-using ChatPlus.Core.Helpers;
+using ChatPlus.Common.Debug;
 using Terraria.ModLoader;
 using Terraria.UI.Chat;
 

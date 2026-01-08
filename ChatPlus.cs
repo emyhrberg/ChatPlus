@@ -1,7 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
 using ChatPlus.Common.Compat.CustomTags;
+using ChatPlus.Common.Debug;
 using ChatPlus.Core.Features.Colors;
 using ChatPlus.Core.Features.Commands;
 using ChatPlus.Core.Features.Emojis;
@@ -9,17 +7,22 @@ using ChatPlus.Core.Features.Glyphs;
 using ChatPlus.Core.Features.Items;
 using ChatPlus.Core.Features.Mentions;
 using ChatPlus.Core.Features.ModIcons;
+using ChatPlus.Core.Features.PlayerColors;
 using ChatPlus.Core.Features.PlayerIcons;
+using ChatPlus.Core.Features.Stats.PlayerStats.StatsPrivacy;
+using ChatPlus.Core.Features.TypingIndicators;
 using ChatPlus.Core.Features.Uploads;
-using ChatPlus.Core.Helpers;
-using ChatPlus.Core.Netcode;
+using ChatPlus.Core.Misc;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.UI;
 
 namespace ChatPlus;
 
-public sealed class ChatPlus : Mod
+public class ChatPlus : Mod
 {
     public static StateManager StateManager { get; private set; }
 
@@ -46,7 +49,30 @@ public sealed class ChatPlus : Mod
 
     public override void HandlePacket(BinaryReader reader, int whoAmI)
     {
-        ModNetHandler.HandlePacket(reader, whoAmI);
+        PacketType type = (PacketType)reader.ReadByte();
+
+        switch (type)
+        {
+            case PacketType.TypingIndicator:
+                TypingIndicatorNetHandler.Receive(reader, whoAmI);
+                break;
+
+            case PacketType.Upload:
+                UploadNetHandler.Receive(reader, whoAmI);
+                break;
+
+            case PacketType.PlayerColor:
+                PlayerColorNetHandler.Receive(reader, whoAmI);
+                break;
+
+            case PacketType.Privacy:
+                PrivacyNetHandler.Receive(reader, whoAmI);
+                break;
+
+            default:
+                Log.Error($"Unknown packet type: {type}");
+                break;
+        }
     }
 
     /// <summary>

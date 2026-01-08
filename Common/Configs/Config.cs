@@ -2,14 +2,13 @@ using System;
 using System.ComponentModel;
 using System.Reflection;
 using ChatPlus.Common.Configs.ConfigElements;
-using ChatPlus.Common.Configs.ConfigElements.Base;
 using ChatPlus.Common.Configs.ConfigElements.ButtonConfigElements;
+using ChatPlus.Common.Debug;
 using ChatPlus.Core.Chat.ChatButtons;
 using ChatPlus.Core.Chat.ChatButtons.Shared;
 using ChatPlus.Core.Features.Mentions;
 using ChatPlus.Core.Features.PlayerColors;
 using ChatPlus.Core.Features.Stats.PlayerStats.StatsPrivacy;
-using ChatPlus.Core.Helpers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Terraria;
@@ -21,6 +20,9 @@ using Terraria.UI;
 
 namespace ChatPlus.Common.Configs;
 
+/// <summary>
+/// Client-sided config.
+/// </summary>
 public class Config : ModConfig
 {
     #region Enums
@@ -80,7 +82,7 @@ public class Config : ModConfig
 
     [Header("ChatFormat")]
 
-    [CustomModConfigItem(typeof(EnumStringOptionElement<TimestampSettings>))]
+    [CustomModConfigItem(typeof(TimestampConfigElement<TimestampSettings>))]
     [BackgroundColor(128, 255, 128)] // Grass Green
     [DefaultValue(TimestampSettings.Off)]
     [JsonConverter(typeof(StringEnumConverter))]
@@ -221,11 +223,11 @@ public class Config : ModConfig
 
         if (Main.netMode == NetmodeID.MultiplayerClient)
         {
-            PrivacyNetHandler.Instance.SendLocalPrivacy();
+            PrivacyNetHandler.SendLocalPrivacy();
         }
         else if (Main.netMode == NetmodeID.Server)
         {
-            PrivacyNetHandler.Instance.BroadcastSingle(Main.myPlayer, StatsPrivacy);
+            PrivacyNetHandler.BroadcastSingle(Main.myPlayer, StatsPrivacy);
         }
     }
 

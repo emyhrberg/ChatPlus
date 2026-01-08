@@ -1,4 +1,4 @@
-﻿namespace ChatPlus.Core.Helpers;
+﻿namespace ChatPlus.Core.Misc;
 
 /// <summary>
 /// Used for quick access to localized text in the mod.

@@ -14,12 +14,12 @@ namespace ChatPlus.Core.Features.Stats.PlayerStats.StatsPrivacy
 
             if (Main.netMode == NetmodeID.MultiplayerClient)
             {
-                PrivacyNetHandler.Instance.SendLocalPrivacy();
+                PrivacyNetHandler.SendLocalPrivacy();
             }
 
             if (Main.netMode == NetmodeID.Server)
             {
-                PrivacyNetHandler.Instance.ServerSyncTo(Player.whoAmI);
+                PrivacyNetHandler.ServerSyncTo(Player.whoAmI);
             }
         }
     }

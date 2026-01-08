@@ -1,9 +1,9 @@
 ﻿using System;
+using ChatPlus.Common;
 using ChatPlus.Common.Configs;
 using ChatPlus.Core.Features.PlayerIcons;
 using ChatPlus.Core.Features.Stats.PlayerStats.SessionTracker;
 using ChatPlus.Core.Features.Stats.PlayerStats.StatsPrivacy;
-using ChatPlus.Core.Helpers;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Audio;

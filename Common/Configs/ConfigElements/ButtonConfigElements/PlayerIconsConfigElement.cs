@@ -1,10 +1,8 @@
-﻿using ChatPlus.Common.Configs.ConfigElements.Base;
-using ChatPlus.Core.Features.PlayerIcons;
-using ChatPlus.Core.Helpers;
+﻿using ChatPlus.Core.Features.PlayerIcons;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 
-namespace ChatPlus.Common.Configs.ConfigElements;
+namespace ChatPlus.Common.Configs.ConfigElements.ButtonConfigElements;
 
 public class PlayerIconsConfigElement : BaseBoolConfigElement
 {

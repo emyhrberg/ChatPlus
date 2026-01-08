@@ -7,8 +7,11 @@ using Terraria.ModLoader.Config.UI;
 using Terraria.UI;
 using Terraria.UI.Chat;
 
-namespace ChatPlus.Common.Configs.ConfigElements.Base;
+namespace ChatPlus.Common.Configs.ConfigElements.ButtonConfigElements;
 
+/// <summary>
+/// Provides a base class for configuration UI elements that represent a boolean setting with a toggle interface.
+/// </summary>
 public abstract class BaseBoolConfigElement : ConfigElement<bool>
 {
     private Asset<Texture2D> toggleTexture = Asset<Texture2D>.Empty;
