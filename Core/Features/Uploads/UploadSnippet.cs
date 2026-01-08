@@ -34,7 +34,7 @@ public class UploadSnippet : TextSnippet
         Rectangle bounds = new((int)pos.X, (int)pos.Y, (int)size.X, (int)size.Y);
         bool hovering = bounds.Contains(Main.MouseScreen.ToPoint());
 
-        if (hovering && Conf.C.OpenImageWhenClicking)
+        if (hovering)
         {
             UICommon.TooltipMouseText(Text);
             if (Main.mouseLeft && Main.mouseLeftRelease)

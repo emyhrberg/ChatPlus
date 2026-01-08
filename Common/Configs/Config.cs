@@ -118,10 +118,6 @@ public class Config : ModConfig
     public bool ShowStatsWhenHovering;
 
     [BackgroundColor(192, 54, 64)] // Calamity Red
-    [DefaultValue(true)]
-    public bool OpenImageWhenClicking;
-
-    [BackgroundColor(192, 54, 64)] // Calamity Red
     [DefaultValue(false)]
     public bool ShowStatsWhenBossIsAlive;
 

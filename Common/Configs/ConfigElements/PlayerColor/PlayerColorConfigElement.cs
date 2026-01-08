@@ -54,9 +54,9 @@ public class PlayerColorConfigElement : ConfigElement<string>
         Height.Set(100, 0);
 
         // Make buttons
-        copyButton = MakeButton("Copy", Loc.Get("ConfigPlayerColor.Copy"), 0, Copy);
-        pasteButton = MakeButton("Paste", Loc.Get("ConfigPlayerColor.Paste"), 36, Paste);
-        randomizeButton = MakeButton("Randomize", Loc.Get("ConfigPlayerColor.Randomize"), 36 * 2, Randomize);
+        copyButton = MakeButton("Copy", Loc.Get("Configs.Config.PlayerColor.Copy"), 0, Copy);
+        pasteButton = MakeButton("Paste", Loc.Get("Configs.Config.PlayerColor.Paste"), 36, Paste);
+        randomizeButton = MakeButton("Randomize", Loc.Get("Configs.Config.PlayerColor.Randomize"), 36 * 2, Randomize);
 
         // Make sliders
         hueSlider = MakeHslSlider(HSLSliderId.Hue, 0);
@@ -185,7 +185,7 @@ public class PlayerColorConfigElement : ConfigElement<string>
 
         // Tooltip assignment must never be null
         TooltipFunction = hovered
-            ? () => "Set your own player color."
+            ? () => Loc.Get("Configs.Config.PlayerColor.SetYourOwnPlayerColor")
             : () => null;
     }
 

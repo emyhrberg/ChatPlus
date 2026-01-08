@@ -16,7 +16,6 @@ using ChatPlus.Core.Misc;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Terraria;
 using Terraria.ModLoader;
 using Terraria.UI;
 

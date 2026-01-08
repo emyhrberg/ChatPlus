@@ -1,0 +1,248 @@
+Mods: {
+	ChatPlus: {
+		Keybinds: {
+			"Open Command Window.DisplayName": Open Commands
+			"Open Emoji Window.DisplayName": Open Emojis
+			"Open Upload Window.DisplayName": Open Uploads
+		}
+		Configs: {
+			Config: {
+				DisplayName: Config
+
+				Headers: {
+					Config: Config
+					ChatSettings: Chat Settings
+					ChatFormat: Chat Format
+					StatsViewer: Stats
+					ShowButtons: Show Buttons
+					Preview: Preview
+				}
+
+				Autocomplete: {
+					Label: Autocomplete
+					Tooltip:
+						'''
+						Opens an autocomplete window for the following prefixes:
+						/ for commands
+						: for emojis
+						# for uploads
+						@ for player mentions
+						[c for colors
+						[g for glyphs
+						[i for items
+						[m for mod icons
+						[p for player icons
+						'''
+				}
+
+				AutocompleteItemsVisible: {
+					Label: Autocomplete Items Visible
+					Tooltip: Set the number of items in the autocomplete window that can be visible at one time.
+				}
+
+				Scrollbar: {
+					Label: Scrollbar
+					Tooltip: Shows a scrollbar when the number of messages exceed the visible limit.
+				}
+
+				TextEditor: {
+					Label: Text Editor
+					Tooltip:
+						'''
+						Improves the text editor with the following shortcuts:
+						Ctrl+C: Copy
+						Ctrl+V: Paste
+						Ctrl+X: Cut
+						Ctrl+A: Select all
+						Arrows: Move cursor
+						Shift+Arrows: Select characters
+						Ctrl+Shift+Arrows: Select words
+						'''
+				}
+
+				ChatsVisible: {
+					Label: Chats Visible
+					Tooltip: Set the number of chat messages that can be visible at one time.
+				}
+
+				timestampSettings: {
+					Label: Timestamp
+					Tooltip: Shows when a chat was written.
+				}
+
+				TypingIndicators: {
+					Label: Typing Indicators
+					Tooltip: Shows when a player is currently writing a chat and shares when you are writing a chat.
+				}
+
+				ModIcon: {
+					Label: Mod Icon
+					Tooltip: Shows which mod writes to chat.
+				}
+
+				PlayerIcon: {
+					Label: Player Icon
+					Tooltip: Shows who writes to chat.
+				}
+
+				PlayerColor: {
+					Label: Player Color
+					Tooltip: ""
+					SetYourOwnPlayerColor: Set your own player color.
+					Copy: Copy
+					Paste: Paste
+					Randomize: Randomize
+				}
+
+				ShowStatsWhenHovering: {
+					Label: Show Stats When Hovering
+					Tooltip: Shows stats when hovering above a player, or mod icon.
+				}
+
+				ShowStatsWhenBossIsAlive: {
+					Label: Show Stats When Boss Is Alive
+					Tooltip: Keep this off to disable stats hovering when a boss is alive.
+				}
+
+				StatsPrivacy: {
+					Label: Stats Privacy
+					Tooltip:
+						'''
+						No One: Only you can view your stats.
+						Team: Only players on your team can view your stats.
+						Everyone: Everyone on the server can view your stats.
+						'''
+				}
+
+				Privacy: {
+					Tooltip: ""
+					NoOne.Label: No One
+					NoOne.Tooltip: No one can see your stats when hovering or clicking your player icon.
+					Team.Label: Team
+					Team.Tooltip: Only players on your team can see your stats when hovering or clicking your player icon.
+					Everyone.Label: Everyone
+					Everyone.Tooltip: Everyone on the server can see your stats when hovering or clicking your player icon.
+				}
+
+				ShowConfigButton: {
+					Label: Show Config Button
+					Tooltip: ""
+				}
+
+				ShowViewmodeButton: {
+					Label: Show Viewmode Button
+					Tooltip: ""
+				}
+
+				ShowColorButton: {
+					Label: Show Color Button
+					Tooltip: ""
+				}
+
+				ShowCommandButton: {
+					Label: Show Command Button
+					Tooltip: ""
+				}
+
+				ShowEmojiButton: {
+					Label: Show Emoji Button
+					Tooltip: ""
+				}
+
+				ShowGlyphButton: {
+					Label: Show Glyph Button
+					Tooltip: ""
+				}
+
+				ShowItemButton: {
+					Label: Show Item Button
+					Tooltip: ""
+				}
+
+				ShowMentionButton: {
+					Label: Show Mention Button
+					Tooltip: ""
+				}
+
+				ShowModIconButton: {
+					Label: Show Mod Icon Button
+					Tooltip: ""
+				}
+
+				ShowPlayerIconButton: {
+					Label: Show Player Icon Button
+					Tooltip: ""
+				}
+
+				ShowUploadButton: {
+					Label: Show Upload Button
+					Tooltip: ""
+				}
+
+				ChatBoxPreview: {
+					Label: Chat Box Preview
+					Tooltip: ""
+				}
+			}
+		}
+
+		Commands: {
+			TagsCommand: {
+				Usage: /tags
+				Description: Shows all tags available in Chat+.
+				TagsHeader: "{0}Tags:{1}"
+				Tag_1: Colors      [c
+				Tag_2: Emojis      [e or :
+				Tag_3: Glyphs      [g
+				Tag_4: Items        [i
+				Tag_5: Mod Icons  [m
+				Tag_6: Players      [p or @
+				Tag_7: Uploads     [u or #
+			}
+
+			ChatClearCommand: {
+				Usage: /clear
+				Description: Clears all chat messages.
+				Cleared: Chat cleared!
+			}
+
+			ModsCommand: {
+				Description: List the names of all the mods
+				Usage: List the names of all the mods
+			}
+		}
+
+		PlayerInfo: {
+			Headers: {
+				Player: Player: {0}
+				Inventory: Inventory
+				Accessories: Accessories
+				Stats: Stats
+				Back: Back
+				Buffs: Buffs
+			}
+
+			Stats: {
+				Health: Health
+				Mana: Mana
+				Defense: Defense
+				Attack: Attack
+				Coins: Coins
+				Ammo: Ammo
+				Minions: Minions
+				Sentries: Sentries
+				TimeInSession: Time In Session
+				DaysInSession: Days In Session
+				LastEnemyHit: Last Enemy Hit
+				LastBossHit: Last Boss Hit
+				Locked: Locked
+			}
+		}
+
+		TypingIndicators: {
+			IsTyping: "{0} is typing..."
+			FewPlayersAreTyping: "{0} are typing..."
+			MultiplePlayersAreTyping: "{0} players are typing..."
+		}
+	}
+}
