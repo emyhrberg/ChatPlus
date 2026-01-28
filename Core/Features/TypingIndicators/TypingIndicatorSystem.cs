@@ -27,7 +27,7 @@ public class TypingIndicatorSystem : ModSystem
     /// Draws the chat bubble above the players
     public override void PostDrawInterface(SpriteBatch sb)
     {
-        if (!Conf.C.TypingIndicators) return;
+        if (Conf.C.TypingIndicators == Config.Privacy.NoOne) return;
         if (Main.gameMenu) return;
 
         Texture2D bubbleTex = TextureAssets.Extra[48].Value;
@@ -126,7 +126,7 @@ public class TypingIndicatorSystem : ModSystem
     /// Draws the chat bubble just below the chat box
     public static void DrawTypingLine(int yOffset=0)
     {
-        if (!Conf.C.TypingIndicators) return;
+        if (Conf.C.TypingIndicators == Config.Privacy.NoOne) return;
 
         // Show chatline ONLY for other players (never for myself).
         var otherTypers = TypingPlayers

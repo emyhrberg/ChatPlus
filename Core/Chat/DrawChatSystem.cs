@@ -197,7 +197,7 @@ internal class DrawChatSystem : ModSystem
 
             delta += 30;
 
-            if (!Conf.C.TypingIndicators)
+            if (Conf.C.TypingIndicators == Config.Privacy.NoOne)
                 delta -= 10;
 
             bool anyTyping = typingPlayers.Any();
@@ -249,7 +249,7 @@ internal class DrawChatSystem : ModSystem
         int x = 0;
         int y = -27;
 
-        if (!Conf.C.TypingIndicators)
+        if (Conf.C.TypingIndicators == Config.Privacy.NoOne)
             y += 10;
 
         DrawChatbox(height, x, y);

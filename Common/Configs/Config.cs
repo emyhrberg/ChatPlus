@@ -89,10 +89,11 @@ public class Config : ModConfig
     [JsonConverter(typeof(StringEnumConverter))]
     public TimestampSettings timestampSettings;
 
-    [CustomModConfigItem(typeof(TypingIndicatorsConfigElement))]
+    //[CustomModConfigItem(typeof(TypingIndicatorsConfigElement))]
     [BackgroundColor(128, 255, 128)] // Grass Green
-    [DefaultValue(true)]
-    public bool TypingIndicators = true;
+    [DefaultValue(Privacy.Everyone)]
+    [JsonConverter(typeof(StringEnumConverter))]
+    public Privacy TypingIndicators = Privacy.Everyone;
 
     [CustomModConfigItem(typeof(ModIconsConfigElement))]
     [BackgroundColor(128, 255, 128)] // Grass Green

@@ -12,7 +12,7 @@ internal class TypingIndicatorPlayer : ModPlayer
     public override void PostUpdate()
     {
         if (Player.whoAmI != Main.myPlayer) return;
-        if (!Conf.C.TypingIndicators) return;
+        if (Conf.C.TypingIndicators == Config.Privacy.NoOne) return;
 
         bool isTyping =
             //Main.hasFocus && 
