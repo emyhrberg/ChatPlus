@@ -17,6 +17,21 @@ internal static class UploadNetHandler
 
     private enum Msg : byte { Request = 1, Forward = 2, Chunk = 3 }
 
+    private static readonly HashSet<string> Requested = new(StringComparer.OrdinalIgnoreCase);
+
+    public static void RequestOnce(string key)
+    {
+        if (string.IsNullOrWhiteSpace(key))
+            return;
+
+        key = key.Trim();
+
+        if (!Requested.Add(key))
+            return;
+
+        Request(key);
+    }
+
     private static readonly Dictionary<string, MemoryStream> Incoming = new(StringComparer.OrdinalIgnoreCase);
     private static readonly Dictionary<string, int> Expected = new(StringComparer.OrdinalIgnoreCase);
 
@@ -115,10 +130,13 @@ internal static class UploadNetHandler
                             {
                                 using var s = new MemoryStream(bytes, writable: false);
                                 Texture2D tex = Texture2D.FromStream(Main.instance.GraphicsDevice, s);
+
                                 UploadTagHandler.Register(key, tex);
+                                Requested.Remove(key);
                             }
                             catch { }
                         });
+
                     }
                     break;
                 }

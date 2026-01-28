@@ -1,8 +1,9 @@
-using System;
 using ChatPlus.Common;
+using ChatPlus.Common.Configs;
 using ChatPlus.Core.Misc;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using System;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.GameContent.UI.Chat;
@@ -26,6 +27,7 @@ public static class ChatButtonRenderer
     /// </summary>
     public static void Draw(SpriteBatch sb, ChatButtonType type, Vector2 pos, int size, bool grayscale = false, bool preview = false)
     {
+
         switch (type)
         {
             case ChatButtonType.Emojis:
