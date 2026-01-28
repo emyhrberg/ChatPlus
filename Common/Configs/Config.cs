@@ -211,7 +211,6 @@ public class Config : ModConfig
         if (TypingIndicators == Privacy.NoOne)
         {
             TypingIndicatorSystem.TypingPlayers.Clear();
-            TypingIndicatorSystem.TypingTeams.Clear();
             TypingIndicatorSystem.TypingPlayers[Main.myPlayer] = false;
         }
     }

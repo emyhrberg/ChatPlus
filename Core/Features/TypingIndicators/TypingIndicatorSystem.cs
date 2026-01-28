@@ -24,15 +24,11 @@ public class TypingIndicatorSystem : ModSystem
     // the fade value goes from 0 to 6 (6 frames to fully appear, 6 frames to fully disappear)
     private static readonly int[] fade = new int[Main.maxPlayers];
 
-    public static Dictionary<int, int> TypingTeams = []; // playerId -> teamId (0 = none/unknown)
-
     /// Draws the chat bubble above the players
     public override void PostDrawInterface(SpriteBatch sb)
     {
         if (Conf.C.TypingIndicators == Config.Privacy.NoOne)
         {
-            TypingPlayers.Clear();
-            TypingTeams.Clear();
             return;
         }
 
@@ -48,7 +44,6 @@ public class TypingIndicatorSystem : ModSystem
             {
                 fade[i] = 0;
                 TypingPlayers.Remove(i);
-                TypingTeams.Remove(i);
                 continue;
             }
 
@@ -226,26 +221,24 @@ public class TypingIndicatorSystem : ModSystem
             return false;
 
         if (viewerWho == typerWho)
-            return false; // keep your "never show myself"
+            return false;
 
         if (mode == Config.Privacy.Everyone)
             return true;
 
-        // Team mode: compare team ids (prefer cached team sent over network)
+        // Team
         if (mode == Config.Privacy.Team)
         {
-            int viewerTeam = Main.player[viewerWho].team;
-            if (viewerTeam == 0)
+            var v = Main.player[viewerWho];
+            var t = Main.player[typerWho];
+
+            if (!v.active || !t.active)
                 return false;
 
-            int typerTeam = 0;
+            if (v.team == 0)
+                return false;
 
-            if (TypingTeams.TryGetValue(typerWho, out int cachedTeam))
-                typerTeam = cachedTeam;
-            else if (Main.player[typerWho].active)
-                typerTeam = Main.player[typerWho].team;
-
-            return typerTeam != 0 && typerTeam == viewerTeam;
+            return v.team == t.team;
         }
 
         return false;
