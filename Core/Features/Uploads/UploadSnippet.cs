@@ -1,4 +1,5 @@
-﻿using ChatPlus.Core.Features.Stats.UploadStats;
+﻿using ChatPlus.Common.Configs;
+using ChatPlus.Core.Features.Stats.UploadStats;
 using ChatPlus.Core.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -51,13 +52,19 @@ public class UploadSnippet : TextSnippet
         float drawH = tex.Height * s;
 
         Vector2 drawPos = pos + new Vector2((box - drawW) * 0.5f, (box - drawH) * 0.5f);
-        sb.Draw(tex, drawPos, null, color, 0f, Vector2.Zero, s, SpriteEffects.None, 0f);
+        sb.Draw(tex, drawPos, null, Color.White, 0f, Vector2.Zero, s, SpriteEffects.None, 0f);
 
         Rectangle bounds = new((int)pos.X, (int)pos.Y, (int)box, (int)box);
         bool hovering = bounds.Contains(Main.MouseScreen.ToPoint());
 
         if (hovering)
         {
+            if (!Conf.C.ShowStatsWhenHovering)
+                return true;
+
+            if (!Conf.C.ShowStatsWhenBossIsAlive && Main.CurrentFrameFlags.AnyActiveBossNPC)
+                return true;
+
             UICommon.TooltipMouseText(Text);
 
             if (Main.mouseLeft && Main.mouseLeftRelease)

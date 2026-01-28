@@ -743,7 +743,7 @@ public class PlayerInfoState : BaseInfoState, ILoadable
 
             if (showTime && PlayerInfoDrawer.HasAccess(Main.LocalPlayer, player))
             {
-                sb.DrawString(font, label, timePos, Color.White * alpha, 0f, Vector2.Zero, textScale, SpriteEffects.None, 0f);
+                //sb.DrawString(font, label, timePos, Color.White * alpha, 0f, Vector2.Zero, textScale, SpriteEffects.None, 0f);
             }
 
             if (hover)

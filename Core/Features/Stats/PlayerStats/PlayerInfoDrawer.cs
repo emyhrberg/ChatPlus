@@ -132,34 +132,45 @@ public static class PlayerInfoDrawer
             ModifyPlayerDrawInfo.ForceFullBrightOnce = false;
         }
     }
-    public static void DrawMapFullscreenBackground(SpriteBatch sb, Rectangle rect, Player p)
+    // Finds the biome of the given player and draws it.
+    public static void DrawMapFullscreenBackground(SpriteBatch sb, Rectangle rect, Player player)
     {
-        var player = Main.LocalPlayer;
-        if (player == null || !player.active) return;
-
-        if (!HasAccess(Main.LocalPlayer, p))
-        {
-            // Draw surface
-            var surfaceAsset = TextureAssets.MapBGs[0];
-            sb.Draw(surfaceAsset.Value, rect, Color.YellowGreen * 0.5f);
+        if (player == null || !player.active)
             return;
-        }
 
-        var screenPos = Main.screenPosition;
-        var tile = Main.tile[(int)(player.Center.X / 16f), (int)(player.Center.Y / 16f)];
-        if (tile == null) return;
+        // Player tile coordinates
+        int tileX = (int)(player.Center.X / 16f);
+        int tileY = (int)(player.Center.Y / 16f);
 
-        int wall = tile.wall;
+        Tile tile = Main.tile[tileX, tileY];
+        if (tile == null)
+            return;
+
+        int wall = tile.WallType;
         int bgIndex = -1;
         Color color = Color.White;
 
-        if (screenPos.Y > (Main.maxTilesY - 232) * 16)
+        // Use player Y position to determine underground/cavern/hell layers
+        float playerYWorld = player.Center.Y;
+        float playerYTiles = playerYWorld / 16f;
+
+        // Hell layer
+        if (playerYWorld > (Main.maxTilesY - 232) * 16)
+        {
             bgIndex = 2;
+        }
+        // Dungeon
         else if (player.ZoneDungeon)
+        {
             bgIndex = 4;
+        }
+        // Spider cave (?) wall
         else if (wall == 87)
+        {
             bgIndex = 13;
-        else if (screenPos.Y > Main.worldSurface * 16.0)
+        }
+        // Underground / cavern backgrounds
+        else if (playerYWorld > Main.worldSurface * 16.0)
         {
             bgIndex = wall switch
             {
@@ -177,27 +188,60 @@ public static class PlayerInfoDrawer
                      player.ZoneRockLayerHeight ? 31 : 1
             };
         }
+        // Surface mushroom biome
         else if (player.ZoneGlowshroom)
+        {
             bgIndex = 19;
+        }
         else
         {
-            color = Main.ColorOfTheSkies;
-            int midTileX = (int)((screenPos.X + Main.screenWidth / 2f) / 16f);
+            color = Color.White;
 
-            if (player.ZoneSkyHeight) bgIndex = 32;
-            else if (player.ZoneCorrupt) bgIndex = player.ZoneDesert ? 36 : 5;
-            else if (player.ZoneCrimson) bgIndex = player.ZoneDesert ? 37 : 6;
-            else if (player.ZoneHallow) bgIndex = player.ZoneDesert ? 38 : 7;
-            else if (screenPos.Y / 16f < Main.worldSurface + 10.0 && (midTileX < 380 || midTileX > Main.maxTilesX - 380))
+            if (player.dead)
+                color = new Color(50, 50, 50, 255);
+
+            int midTileX = tileX;
+
+            if (player.ZoneSkyHeight)
+                bgIndex = 32;
+            else if (player.ZoneCorrupt)
+                bgIndex = player.ZoneDesert ? 36 : 5;
+            else if (player.ZoneCrimson)
+                bgIndex = player.ZoneDesert ? 37 : 6;
+            else if (player.ZoneHallow)
+                bgIndex = player.ZoneDesert ? 38 : 7;
+
+            // "Ocean" style edges
+            else if (playerYTiles < Main.worldSurface + 10.0 &&
+                     (midTileX < 380 || midTileX > Main.maxTilesX - 380))
                 bgIndex = 10;
-            else if (player.ZoneSnow) bgIndex = 11;
-            else if (player.ZoneJungle) bgIndex = 8;
-            else if (player.ZoneDesert) bgIndex = 9;
-            else if (Main.bloodMoon) { bgIndex = 25; color *= 2f; }
-            else if (player.ZoneGraveyard) bgIndex = 26;
+            else if (player.ZoneSnow)
+                bgIndex = 11;
+            else if (player.ZoneJungle)
+                bgIndex = 8;
+            else if (player.ZoneDesert)
+                bgIndex = 9;
+            else if (Main.bloodMoon)
+            {
+                bgIndex = 25;
+                color *= 2f;
+            }
+            else if (player.ZoneGraveyard)
+                bgIndex = 26;
         }
 
+        //int safeIndex = bgIndex >= 0 && bgIndex < Ass.MapBG.Length ? bgIndex : 0;
+        //var asset = Ass.MapBG[safeIndex];
+
         var asset = bgIndex >= 0 && bgIndex < TextureAssets.MapBGs.Length ? TextureAssets.MapBGs[bgIndex] : TextureAssets.MapBGs[0];
+
+        rect.X += 10;
+        rect.Y += 10;
+        rect.Width -= 20;
+        rect.Height -= 20;
+
+        if (asset == null || asset.Value == null)
+            return;
 
         sb.Draw(asset.Value, rect, color);
     }

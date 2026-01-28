@@ -1,6 +1,6 @@
 displayName = Chat+
 side = both
 author = Erky
-version = 1.4.2
+version = 1.5
 buildIgnore = .git\*, bin\*, obj\*, Assets\Workshop\*, Assets\NotoEmoji
 sortAfter = ChitterChatter, ChatImprover

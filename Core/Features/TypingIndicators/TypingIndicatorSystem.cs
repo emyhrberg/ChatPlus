@@ -24,10 +24,18 @@ public class TypingIndicatorSystem : ModSystem
     // the fade value goes from 0 to 6 (6 frames to fully appear, 6 frames to fully disappear)
     private static readonly int[] fade = new int[Main.maxPlayers];
 
+    public static Dictionary<int, int> TypingTeams = []; // playerId -> teamId (0 = none/unknown)
+
     /// Draws the chat bubble above the players
     public override void PostDrawInterface(SpriteBatch sb)
     {
-        if (Conf.C.TypingIndicators == Config.Privacy.NoOne) return;
+        if (Conf.C.TypingIndicators == Config.Privacy.NoOne)
+        {
+            TypingPlayers.Clear();
+            TypingTeams.Clear();
+            return;
+        }
+
         if (Main.gameMenu) return;
 
         Texture2D bubbleTex = TextureAssets.Extra[48].Value;
@@ -39,10 +47,12 @@ public class TypingIndicatorSystem : ModSystem
             if (!p.active)
             {
                 fade[i] = 0;
+                TypingPlayers.Remove(i);
+                TypingTeams.Remove(i);
                 continue;
             }
 
-            bool typing = TypingPlayers.TryGetValue(i, out var v) && v;
+            bool typing = TypingPlayers.TryGetValue(i, out var v) && v && CanSeeTyping(Main.myPlayer, i);
 
             if (typing && fade[i] == 0)
             {
@@ -133,7 +143,8 @@ public class TypingIndicatorSystem : ModSystem
             .Where(kvp => kvp.Value
                          && kvp.Key >= 0
                          && kvp.Key < Main.maxPlayers
-                         && Main.player[kvp.Key].active)
+                         && Main.player[kvp.Key].active
+                         && CanSeeTyping(Main.myPlayer, kvp.Key))
             .Select(kvp => kvp.Key)
             .ToList();
 
@@ -205,5 +216,38 @@ public class TypingIndicatorSystem : ModSystem
         int h = 26;
         int frame = (int)((Main.GameUpdateCount / speed) % frameCount);
         return new Rectangle(frame * 32, 0, w, h);
+    }
+
+    internal static bool CanSeeTyping(int viewerWho, int typerWho)
+    {
+        var mode = Conf.C.TypingIndicators;
+
+        if (mode == Config.Privacy.NoOne)
+            return false;
+
+        if (viewerWho == typerWho)
+            return false; // keep your "never show myself"
+
+        if (mode == Config.Privacy.Everyone)
+            return true;
+
+        // Team mode: compare team ids (prefer cached team sent over network)
+        if (mode == Config.Privacy.Team)
+        {
+            int viewerTeam = Main.player[viewerWho].team;
+            if (viewerTeam == 0)
+                return false;
+
+            int typerTeam = 0;
+
+            if (TypingTeams.TryGetValue(typerWho, out int cachedTeam))
+                typerTeam = cachedTeam;
+            else if (Main.player[typerWho].active)
+                typerTeam = Main.player[typerWho].team;
+
+            return typerTeam != 0 && typerTeam == viewerTeam;
+        }
+
+        return false;
     }
 }

@@ -8,7 +8,7 @@ Mods: {
 
 		Configs: {
 			Config: {
-				DisplayName: Config
+				DisplayName: Client Config
 
 				Headers: {
 					Config: Config
@@ -38,12 +38,12 @@ Mods: {
 
 				AutocompleteItemsVisible: {
 					Label: Autocomplete Items Visible
-					Tooltip: Set the number of items in the autocomplete window that can be visible at one time.
+					Tooltip: Number of items in the autocomplete window visible at one time
 				}
 
 				Scrollbar: {
 					Label: Scrollbar
-					Tooltip: Shows a scrollbar when the number of messages exceed the visible limit.
+					Tooltip: Shows a scrollbar next to chat
 				}
 
 				TextEditor: {
@@ -63,33 +63,33 @@ Mods: {
 
 				ChatsVisible: {
 					Label: Chats Visible
-					Tooltip: Set the number of chat messages that can be visible at one time.
+					Tooltip: Maximum number of chat messages rows visible at one time
 				}
 
 				timestampSettings: {
 					Label: Timestamp
-					Tooltip: Shows when a chat was written.
+					Tooltip: Show when a chat was written
 				}
 
 				TypingIndicators: {
 					Label: Typing Indicators
-					Tooltip: Shows when a player is currently writing a chat and shares when you are writing a chat.
+					Tooltip: Show chat bubbles when players are typing
 				}
 
 				ModIcon: {
 					Label: Mod Icon
-					Tooltip: Shows which mod writes to chat.
+					Tooltip: Shows which mod writes to chat
 				}
 
 				PlayerIcon: {
 					Label: Player Icon
-					Tooltip: Shows who writes to chat.
+					Tooltip: Shows who writes to chat
 				}
 
 				PlayerColor: {
 					Label: Player Color
 					Tooltip: ""
-					SetYourOwnPlayerColor: Set your own player color.
+					SetYourOwnPlayerColor: Set your own player color
 					Copy: Copy
 					Paste: Paste
 					Randomize: Randomize
@@ -97,41 +97,12 @@ Mods: {
 
 				ShowStatsWhenHovering: {
 					Label: Show Stats When Hovering
-					Tooltip: Shows stats when hovering above a player, or mod icon.
+					Tooltip: Makes players and mod icons in the chat history interactable
 				}
 
 				ShowStatsWhenBossIsAlive: {
 					Label: Show Stats When Boss Is Alive
-					Tooltip: ""
-				}
-
-				StatsPrivacy: {
-					Label: Stats Privacy
-					Tooltip:
-						'''
-						No One: Only you can view your stats.
-						Team: Only players on your team can view your stats.
-						Everyone: Everyone on the server can view your stats.
-						'''
-				}
-
-				Privacy: {
-					Tooltip: ""
-
-					NoOne: {
-						Label: No One
-						Tooltip: No one can see your stats when hovering or clicking your player icon.
-					}
-
-					Team: {
-						Label: Team
-						Tooltip: Only players on your team can see your stats when hovering or clicking your player icon.
-					}
-
-					Everyone: {
-						Label: Everyone
-						Tooltip: Everyone on the server can see your stats when hovering or clicking your player icon.
-					}
+					Tooltip: Makes stats show when a boss is alive
 				}
 
 				ShowConfigButton: {
@@ -193,6 +164,11 @@ Mods: {
 					Label: Chat Box Preview
 					Tooltip: ""
 				}
+
+				StatsPrivacy: {
+					Label: Stats Privacy
+					Tooltip: Determines who can see my stats
+				}
 			}
 
 			TimestampSettings: {
@@ -229,17 +205,17 @@ Mods: {
 
 				NoOne: {
 					Label: No One
-					Tooltip: No one can see your stats when hovering or clicking your player icon.
+					Tooltip: Visible to nobody
 				}
 
 				Team: {
 					Label: Team
-					Tooltip: Only players on your team can see your stats when hovering or clicking your player icon.
+					Tooltip: Visible to your team only
 				}
 
 				Everyone: {
 					Label: Everyone
-					Tooltip: Everyone on the server can see your stats when hovering or clicking your player icon.
+					Tooltip: Visible to everyone
 				}
 			}
 		}

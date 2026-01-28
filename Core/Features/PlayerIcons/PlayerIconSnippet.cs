@@ -64,6 +64,9 @@ public class PlayerIconSnippet : TextSnippet
 
     public override void OnClick()
     {
+        if (!Conf.C.ShowStatsWhenHovering)
+            return;
+
         base.OnClick();
 
         Main.LocalPlayer.mouseInterface = true;

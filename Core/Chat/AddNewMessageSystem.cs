@@ -134,7 +134,7 @@ internal class AddNewMessageSystem : ModSystem
         }
 
 #if DEBUG
-        Log.Info("New chat: " + resultText);
+        //Log.Debug("New chat: " + resultText);
 #endif
 
         // Hand off to vanilla

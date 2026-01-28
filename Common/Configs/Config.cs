@@ -10,6 +10,7 @@ using ChatPlus.Core.Features.Mentions;
 using ChatPlus.Core.Features.PlayerColors;
 using ChatPlus.Core.Features.Stats.PlayerStats.Privacy;
 using ChatPlus.Core.Features.Stats.PlayerStats.StatsPrivacy;
+using ChatPlus.Core.Features.TypingIndicators;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Terraria;
@@ -202,7 +203,19 @@ public class Config : ModConfig
         UpdateChatButtons();
         UpdatePlayerColor();
         UpdateStatsPrivacy();
+        UpdateTypingIndicators();
     }
+
+    private void UpdateTypingIndicators()
+    {
+        if (TypingIndicators == Privacy.NoOne)
+        {
+            TypingIndicatorSystem.TypingPlayers.Clear();
+            TypingIndicatorSystem.TypingTeams.Clear();
+            TypingIndicatorSystem.TypingPlayers[Main.myPlayer] = false;
+        }
+    }
+
 
     private void UpdateShowCount()
     {

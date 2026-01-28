@@ -59,19 +59,16 @@ public sealed class ModIconSnippet : TextSnippet
         var hoverRect = new Rectangle((int)pos.X - 5, (int)pos.Y - 4, 32, (int)size.Y + 5);
         if (hoverRect.Contains(Main.MouseScreen.ToPoint()))
         {
-            if (!Conf.C.ShowStatsWhenHovering)
-                return true;
+            bool allowOverlay = Conf.C.ShowStatsWhenHovering
+                && (Conf.C.ShowStatsWhenBossIsAlive || !Main.CurrentFrameFlags.AnyActiveBossNPC);
 
-            if (!Conf.C.ShowStatsWhenBossIsAlive && Main.CurrentFrameFlags.AnyActiveBossNPC)
-                return true;
-
-            if (ModLoader.TryGetMod(modName, out Mod mod))
+            if (allowOverlay && ModLoader.TryGetMod(modName, out Mod mod))
             {
                 HoveredModOverlay.Set(mod);
-            }
 
-            if (Main.mouseLeft && Main.mouseLeftRelease)
-                OnClick();
+                if (Main.mouseLeft && Main.mouseLeftRelease)
+                    OnClick();
+            }
         }
 
         // Try to resolve icon_small -> icon
@@ -95,6 +92,9 @@ public sealed class ModIconSnippet : TextSnippet
 
     public override void OnClick()
     {
+        if (!Conf.C.ShowStatsWhenHovering)
+            return;
+
         base.OnClick();
 
         var state = ModInfoState.Instance;

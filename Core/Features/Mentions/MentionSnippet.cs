@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using ChatPlus.Common.Configs;
+using ChatPlus.Common.Debug;
 using ChatPlus.Core.Features.PlayerColors;
 using ChatPlus.Core.Features.Stats.PlayerStats;
 using ChatPlus.Core.Misc;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ReLogic.Graphics;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ModLoader;
@@ -169,10 +171,20 @@ public sealed class MentionSnippet : TextSnippet
             int underlineY = (int)Math.Floor(p.Y + lineH - 10f);
             sb.Draw(TextureAssets.MagicPixel.Value, new Rectangle((int)p.X, underlineY, width, 2), ul);
 
-            // topmost overlay + click
-            HoveredPlayerOverlay.Set(_lastIndex);
-            if (Main.mouseLeft && Main.mouseLeftRelease)
-                OnClick();   // uses _lastIndex resolved above
+            // Gate BOTH overlay and click
+            bool allowInteraction = Conf.C.ShowStatsWhenHovering
+                && (Conf.C.ShowStatsWhenBossIsAlive || !Main.CurrentFrameFlags.AnyActiveBossNPC);
+
+            if (allowInteraction)
+            {
+                HoveredPlayerOverlay.Set(_lastIndex);
+
+                if (Main.mouseLeft && Main.mouseLeftRelease)
+                {
+                    Log.Debug("click player");
+                    OnClick();
+                }
+            }
         }
 
         return true;
@@ -223,6 +235,12 @@ public sealed class MentionSnippet : TextSnippet
 
     public override void OnClick()
     {
+        if (!Conf.C.ShowStatsWhenHovering)
+            return;
+
+        if (!Conf.C.ShowStatsWhenBossIsAlive && Main.CurrentFrameFlags.AnyActiveBossNPC)
+            return;
+
         Main.LocalPlayer.mouseInterface = true;
 
         int idx = _lastIndex;
