@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.GameContent;
+using Terraria.ModLoader.UI;
 using Terraria.UI.Chat;
 
 namespace ChatPlus.Core.Features.Links;
@@ -13,6 +14,7 @@ public sealed class LinkSnippet : TextSnippet
 {
     private readonly string url;
     private uint lastHoverFrame;
+    private bool hovered;
 
     public LinkSnippet(string displayText, string url, Color baseColor)
         : base(displayText, baseColor)
@@ -23,26 +25,20 @@ public sealed class LinkSnippet : TextSnippet
 
     public override void OnHover()
     {
-        lastHoverFrame = Main.GameUpdateCount;
         Main.LocalPlayer.mouseInterface = true;
-
-        // Optional tooltip:
-        // UICommon.TooltipMouseText(url);
+        //UICommon.TooltipMouseText(url);
+        Main.instance.MouseText("Open link", hackedMouseY: 20);
+        LinkCursorOverrideSystem.WantLinkCursor = true;
     }
 
     public override void OnClick()
     {
         if (string.IsNullOrWhiteSpace(url))
-        {
             return;
-        }
 
         try
         {
-            Process.Start(new ProcessStartInfo(url)
-            {
-                UseShellExecute = true
-            });
+            Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
         }
         catch (Exception ex)
         {
@@ -53,49 +49,56 @@ public sealed class LinkSnippet : TextSnippet
 
     public override Color GetVisibleColor()
     {
-        if (lastHoverFrame == Main.GameUpdateCount)
-        {
-            return new Color(6, 69, 173);
-        }
-
-        return new Color(0, 125, 255);
+        return hovered ? new Color(6, 69, 173) : new Color(0, 125, 255);
     }
 
-    // Preserve URL when the chat system splits the snippet across lines.
     public override TextSnippet CopyMorph(string newText)
     {
         return new LinkSnippet(newText, url, Color);
     }
 
-    // Optional underline when hovered.
     public override bool UniqueDraw(bool justCheckingString, out Vector2 size, SpriteBatch sb, Vector2 pos = default, Color passColor = default, float scale = 1f)
     {
         var font = FontAssets.MouseText.Value;
         size = ChatManager.GetStringSize(font, Text, new Vector2(scale));
 
         if (justCheckingString)
-        {
             return false;
-        }
 
         bool isShadowPass = passColor.R + passColor.G + passColor.B <= 5;
         if (isShadowPass)
-        {
             return false;
+
+        var rect = new Rectangle(
+            (int)Math.Floor(pos.X),
+            (int)Math.Floor(pos.Y),
+            (int)Math.Ceiling(size.X),
+            (int)Math.Ceiling(font.LineSpacing * scale)-11);
+
+        // debug: draw hover rectangle
+        //sb.Draw(TextureAssets.MagicPixel.Value, rect, Color.Red * 0.35f);
+
+        hovered = rect.Contains(Main.MouseScreen.ToPoint());
+
+        if (hovered)
+        {
+            Main.LocalPlayer.mouseInterface = true;
+
+            if (Main.mouseLeft && Main.mouseLeftRelease)
+            {
+                Main.mouseLeftRelease = false;
+                OnClick();
+            }
+
+            int underlineY = rect.Bottom;
+            var underlineRect = new Rectangle(rect.X, underlineY, rect.Width, 2);
+            sb.Draw(TextureAssets.MagicPixel.Value, underlineRect, GetVisibleColor());
         }
 
-        if (lastHoverFrame != Main.GameUpdateCount)
-        {
-            return false;
-        }
+        // debug: comment this out
+        LinkCursorOverrideSystem.WantLinkCursor = false;
 
-        int width = (int)Math.Ceiling(size.X);
-        int lineHeight = (int)Math.Ceiling(font.LineSpacing * scale);
-        int underlineY = (int)Math.Floor(pos.Y + lineHeight - 2f);
-
-        var underlineRect = new Rectangle((int)pos.X, underlineY, width, 2);
-        sb.Draw(TextureAssets.MagicPixel.Value, underlineRect, GetVisibleColor());
-
-        return false; // let vanilla draw the text
+        return false; // let vanilla draw text
     }
 }
+

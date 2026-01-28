@@ -1,4 +1,5 @@
-﻿using ChatPlus.Core.Features.BoldText;
+﻿using ChatPlus.Common.Debug;
+using ChatPlus.Core.Features.BoldText;
 using ChatPlus.Core.Features.Emojis;
 using ChatPlus.Core.Features.Links;
 using ChatPlus.Core.Features.Mentions;
@@ -27,7 +28,7 @@ internal class TagSystem : ModSystem
         ChatManager.Register<BoldTagHandler>(["b", "bold"]);
         ChatManager.Register<EmojiTagHandler>(["e", "emoji"]); // or :
         ChatManager.Register<ItalicsTagHandler>(["italics"]); // avoid i to prevent item tag conflict
-        ChatManager.Register<LinkTagHandler>(["l", "link"]);
+        ChatManager.Register<LinkTagHandler>(["link"]);
         ChatManager.Register<MentionTagHandler>(["mention"]); // or @
         ChatManager.Register<ModIconTagHandler>(["m", "mod"]);
         ChatManager.Register<PlayerIconTagHandler>(["p", "player"]);
@@ -40,5 +41,7 @@ internal class TagSystem : ModSystem
         // Extra
         // Safe cache filled once mods are loaded
         //ModMetaCache.InitializeCache(); // build once, after mods are loaded
+        ChatManager.Register<LinkTagHandler>(["link"]);
+        Log.Debug("link registered");
     }
 }

@@ -29,6 +29,8 @@ public static class Ass
     public static Asset<Texture2D> ButtonColor;
     public static Asset<Texture2D> ButtonUpload;
 
+    public static Asset<Texture2D> LinkCursor;
+
     // This bool automatically initializes all specified assets
     public static bool Initialized { get; set; }
 

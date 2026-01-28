@@ -96,6 +96,7 @@ internal class AddNewMessageSystem : ModSystem
         // 5) Link tag
         if (LinkTagHandler.TryGetLink(resultText, out string linkText))
         {
+            Log.Debug("Found link: " + linkText);
             string linkTag = LinkTagHandler.GenerateTag(linkText);
             resultText = resultText.Replace(linkText, linkTag);
         }
@@ -133,7 +134,7 @@ internal class AddNewMessageSystem : ModSystem
         }
 
 #if DEBUG
-        //Log.Info("New chat: " + resultText);
+        Log.Info("New chat: " + resultText);
 #endif
 
         // Hand off to vanilla
