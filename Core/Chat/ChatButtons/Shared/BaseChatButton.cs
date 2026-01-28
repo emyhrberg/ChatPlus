@@ -69,10 +69,14 @@ internal abstract class BaseChatButton : UIElement
 
         int gap = (Type == ChatButtonType.Config || Type == ChatButtonType.Viewmode) ? 2 : 2;
         var pos = ChatButtonLayout.ComputeTopLeft(Type, size: 24, gap: gap);
-        if (Math.Abs(Left.Pixels - pos.X) > 0.5f || Math.Abs(Top.Pixels - pos.Y) > 0.5f)
+        //if (Math.Abs(Left.Pixels - pos.X) > 0.5f || Math.Abs(Top.Pixels - pos.Y) > 0.5f)
         {
+            int yOffset = 0;
+            if (!Conf.C.TypingIndicators)
+                yOffset = 10;
+
             Left.Set(pos.X, 0f);
-            Top.Set(pos.Y, 0f);
+            Top.Set(pos.Y + yOffset, 0f);
             Recalculate();
         }
     }

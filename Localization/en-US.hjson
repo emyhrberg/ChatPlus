@@ -5,6 +5,7 @@ Mods: {
 			"Open Emoji Window.DisplayName": Open Emojis
 			"Open Upload Window.DisplayName": Open Uploads
 		}
+
 		Configs: {
 			Config: {
 				DisplayName: Config
@@ -101,7 +102,7 @@ Mods: {
 
 				ShowStatsWhenBossIsAlive: {
 					Label: Show Stats When Boss Is Alive
-					Tooltip: Keep this off to disable stats hovering when a boss is alive.
+					Tooltip: ""
 				}
 
 				StatsPrivacy: {
@@ -116,12 +117,21 @@ Mods: {
 
 				Privacy: {
 					Tooltip: ""
-					NoOne.Label: No One
-					NoOne.Tooltip: No one can see your stats when hovering or clicking your player icon.
-					Team.Label: Team
-					Team.Tooltip: Only players on your team can see your stats when hovering or clicking your player icon.
-					Everyone.Label: Everyone
-					Everyone.Tooltip: Everyone on the server can see your stats when hovering or clicking your player icon.
+
+					NoOne: {
+						Label: No One
+						Tooltip: No one can see your stats when hovering or clicking your player icon.
+					}
+
+					Team: {
+						Label: Team
+						Tooltip: Only players on your team can see your stats when hovering or clicking your player icon.
+					}
+
+					Everyone: {
+						Label: Everyone
+						Tooltip: Everyone on the server can see your stats when hovering or clicking your player icon.
+					}
 				}
 
 				ShowConfigButton: {
@@ -182,6 +192,54 @@ Mods: {
 				ChatBoxPreview: {
 					Label: Chat Box Preview
 					Tooltip: ""
+				}
+			}
+
+			TimestampSettings: {
+				Tooltip: ""
+
+				Off: {
+					Label: Off
+					Tooltip: ""
+				}
+
+				HourAndMinute12Hours: {
+					Label: Hour And Minute12 Hours
+					Tooltip: ""
+				}
+
+				HourAndMinuteAndSeconds12Hours: {
+					Label: Hour And Minute And Seconds12 Hours
+					Tooltip: ""
+				}
+
+				HourAndMinute24Hours: {
+					Label: Hour And Minute24 Hours
+					Tooltip: ""
+				}
+
+				HourAndMinuteAndSeconds24Hours: {
+					Label: Hour And Minute And Seconds24 Hours
+					Tooltip: ""
+				}
+			}
+
+			Privacy: {
+				Tooltip: ""
+
+				NoOne: {
+					Label: No One
+					Tooltip: No one can see your stats when hovering or clicking your player icon.
+				}
+
+				Team: {
+					Label: Team
+					Tooltip: Only players on your team can see your stats when hovering or clicking your player icon.
+				}
+
+				Everyone: {
+					Label: Everyone
+					Tooltip: Everyone on the server can see your stats when hovering or clicking your player icon.
 				}
 			}
 		}

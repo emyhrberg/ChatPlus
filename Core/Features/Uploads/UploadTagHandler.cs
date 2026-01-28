@@ -33,29 +33,21 @@ public sealed class UploadTagHandler : ITagHandler
 
     TextSnippet ITagHandler.Parse(string text, Color baseColor, string options)
     {
-        // allow keys with spaces: parser gives part in 'text' and the rest in 'options' (if it doesn’t contain '=').
         string key = text ?? string.Empty;
         if (!string.IsNullOrWhiteSpace(options) && options.IndexOf('=') < 0)
             key = $"{key} {options}".Trim();
 
-        key = key.Trim().TrimEnd(']'); // tolerate stray closers
+        key = key.Trim().TrimEnd(']');
 
-        if (Registry.TryGetValue(key, out var texture))
+        // Always return an UploadSnippet so it can start drawing as soon as the texture arrives.
+        if (!Registry.ContainsKey(key) && Main.netMode != NetmodeID.SinglePlayer)
+            UploadNetHandler.RequestOnce(key);
+
+        return new UploadSnippet(key)
         {
-            return new UploadSnippet(key, texture)
-            {
-                Text = GenerateTag(key)
-            };
-        }
-
-        // Handle multiplayer
-        if (Main.netMode != NetmodeID.SinglePlayer)
-        {
-            UploadNetHandler.Request(key);
-        }
-
-        // If no tag was found, return the regular snippet
-        return new TextSnippet(text ?? string.Empty);
+            Text = GenerateTag(key),
+            Color = baseColor
+        };
     }
 
     // helper
