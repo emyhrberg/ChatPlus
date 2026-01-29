@@ -27,7 +27,7 @@ public class TypingIndicatorSystem : ModSystem
     /// Draws the chat bubble above the players
     public override void PostDrawInterface(SpriteBatch sb)
     {
-        if (Conf.C.TypingIndicators == Config.Privacy.NoOne)
+        if (Conf.C.TypingIndicators == Config.TypingIndicatorsMode.NoOne)
         {
             return;
         }
@@ -131,7 +131,7 @@ public class TypingIndicatorSystem : ModSystem
     /// Draws the chat bubble just below the chat box
     public static void DrawTypingLine(int yOffset=0)
     {
-        if (Conf.C.TypingIndicators == Config.Privacy.NoOne) return;
+        if (Conf.C.TypingIndicators == Config.TypingIndicatorsMode.NoOne) return;
 
         // Show chatline ONLY for other players (never for myself).
         var otherTypers = TypingPlayers
@@ -217,17 +217,17 @@ public class TypingIndicatorSystem : ModSystem
     {
         var mode = Conf.C.TypingIndicators;
 
-        if (mode == Config.Privacy.NoOne)
+        if (mode == Config.TypingIndicatorsMode.NoOne)
             return false;
 
         if (viewerWho == typerWho)
             return false;
 
-        if (mode == Config.Privacy.Everyone)
+        if (mode == Config.TypingIndicatorsMode.Everyone)
             return true;
 
         // Team
-        if (mode == Config.Privacy.Team)
+        if (mode == Config.TypingIndicatorsMode.Team)
         {
             var v = Main.player[viewerWho];
             var t = Main.player[typerWho];

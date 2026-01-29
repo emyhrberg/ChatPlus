@@ -9,7 +9,6 @@ using ChatPlus.Core.Chat.ChatButtons.Shared;
 using ChatPlus.Core.Features.Mentions;
 using ChatPlus.Core.Features.PlayerColors;
 using ChatPlus.Core.Features.Stats.PlayerStats.Privacy;
-using ChatPlus.Core.Features.Stats.PlayerStats.StatsPrivacy;
 using ChatPlus.Core.Features.TypingIndicators;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -28,12 +27,20 @@ namespace ChatPlus.Common.Configs;
 public class Config : ModConfig
 {
     #region Enums
-    public enum Privacy
+    public enum StatsPrivacyMode
     {
         NoOne,
         Team,
         Everyone
     }
+
+    public enum TypingIndicatorsMode
+    {
+        NoOne,
+        Team,
+        Everyone
+    }
+
     public enum TimestampSettings
     {
         Off,
@@ -92,9 +99,9 @@ public class Config : ModConfig
 
     //[CustomModConfigItem(typeof(TypingIndicatorsConfigElement))]
     [BackgroundColor(128, 255, 128)] // Grass Green
-    [DefaultValue(Privacy.Everyone)]
     [JsonConverter(typeof(StringEnumConverter))]
-    public Privacy TypingIndicators = Privacy.Everyone;
+    [DefaultValue(TypingIndicatorsMode.Everyone)]
+    public TypingIndicatorsMode TypingIndicators = TypingIndicatorsMode.Everyone;
 
     [CustomModConfigItem(typeof(ModIconsConfigElement))]
     [BackgroundColor(128, 255, 128)] // Grass Green
@@ -124,9 +131,10 @@ public class Config : ModConfig
     public bool ShowStatsWhenBossIsAlive;
 
     [BackgroundColor(192, 54, 64)] // Calamity Red
-    [DefaultValue(Privacy.Everyone)]
     [JsonConverter(typeof(StringEnumConverter))]
-    public Privacy StatsPrivacy;
+    [DefaultValue(StatsPrivacyMode.Everyone)]
+    public StatsPrivacyMode StatsPrivacy;
+
 
     // -----------------------------------------------------------
 
@@ -208,7 +216,7 @@ public class Config : ModConfig
 
     private void UpdateTypingIndicators()
     {
-        if (TypingIndicators == Privacy.NoOne)
+        if (TypingIndicators == TypingIndicatorsMode.NoOne)
         {
             TypingIndicatorSystem.TypingPlayers.Clear();
             TypingIndicatorSystem.TypingPlayers[Main.myPlayer] = false;

@@ -10,7 +10,6 @@ namespace ChatPlus.Core.Features.TypingIndicators;
 internal class TypingIndicatorPlayer : ModPlayer
 {
     private bool lastTyping;
-    private Config.Privacy _lastMode = Config.Privacy.Everyone;
 
     public override void PostUpdate()
     {

@@ -1,5 +1,4 @@
 ﻿using ChatPlus.Common.Configs;
-using ChatPlus.Core.Features.Stats.PlayerStats.StatsPrivacy;
 using ChatPlus.Core.Misc;
 using System.IO;
 using Terraria;
@@ -27,7 +26,7 @@ internal static class PrivacyNetHandler
         packet.Send();
     }
 
-    public static void BroadcastSingle(int who, Config.Privacy privacy)
+    public static void BroadcastSingle(int who, Config.StatsPrivacyMode privacy)
     {
         if (Main.netMode != NetmodeID.Server) return;
 
@@ -62,7 +61,7 @@ internal static class PrivacyNetHandler
         if (op != Op.PrivacyUpdate) return;
 
         int playerId = reader.ReadByte();
-        var privacy = (Config.Privacy)reader.ReadByte();
+        var privacy = (Config.StatsPrivacyMode)reader.ReadByte();
 
         PrivacyCache.Set(playerId, privacy);
 

@@ -2,16 +2,16 @@
 using ChatPlus.Common.Debug;
 using Terraria;
 
-namespace ChatPlus.Core.Features.Stats.PlayerStats.StatsPrivacy;
+namespace ChatPlus.Core.Features.Stats.PlayerStats.Privacy;
 public static class PrivacyCache
 {
-    static readonly Config.Privacy[] values = new Config.Privacy[Main.maxPlayers];
+    static readonly Config.StatsPrivacyMode[] values = new Config.StatsPrivacyMode[Main.maxPlayers];
 
     static PrivacyCache()
     {
         for (int i = 0; i < values.Length; i++)
         {
-            values[i] = Config.Privacy.Everyone;
+            values[i] = Config.StatsPrivacyMode.Everyone;
         }
     }
 
@@ -29,17 +29,17 @@ public static class PrivacyCache
         }
     }
 
-    public static void Set(int whoAmI, Config.Privacy value)
+    public static void Set(int whoAmI, Config.StatsPrivacyMode value)
     {
         if (whoAmI < 0) return;
         if (whoAmI >= values.Length) return;
         values[whoAmI] = value;
     }
 
-    public static Config.Privacy Get(int whoAmI)
+    public static Config.StatsPrivacyMode Get(int whoAmI)
     {
-        if (whoAmI < 0) return Config.Privacy.Everyone;
-        if (whoAmI >= values.Length) return Config.Privacy.Everyone;
+        if (whoAmI < 0) return Config.StatsPrivacyMode.Everyone;
+        if (whoAmI >= values.Length) return Config.StatsPrivacyMode.Everyone;
         return values[whoAmI];
     }
 }

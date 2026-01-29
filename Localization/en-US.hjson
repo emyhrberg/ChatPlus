@@ -200,22 +200,41 @@ Mods: {
 				}
 			}
 
-			Privacy: {
+			TypingIndicatorsMode: {
 				Tooltip: ""
 
 				NoOne: {
 					Label: No One
-					Tooltip: Visible to nobody
+					Tooltip: "Show no chat bubbles from anyone"
 				}
 
 				Team: {
 					Label: Team
-					Tooltip: Visible to your team only
+					Tooltip: "Show only chat bubbles from teammates"
 				}
 
 				Everyone: {
 					Label: Everyone
-					Tooltip: Visible to everyone
+					Tooltip: "Show chat bubbles from everyone"
+				}
+			}
+
+			StatsPrivacyMode: {
+				Tooltip: ""
+
+				NoOne: {
+					Label: No One
+					Tooltip: "Only you can view your player stats"
+				}
+
+				Team: {
+					Label: Team
+					Tooltip: "Teammates can view your player stats"
+				}
+
+				Everyone: {
+					Label: Everyone
+					Tooltip: "Everyone can view your player stats"
 				}
 			}
 		}

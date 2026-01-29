@@ -1,5 +1,4 @@
 ﻿using ChatPlus.Common.Configs;
-using ChatPlus.Core.Features.Stats.PlayerStats.StatsPrivacy;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;

@@ -2,8 +2,8 @@
 using ChatPlus.Common;
 using ChatPlus.Common.Configs;
 using ChatPlus.Core.Features.PlayerIcons;
+using ChatPlus.Core.Features.Stats.PlayerStats.Privacy;
 using ChatPlus.Core.Features.Stats.PlayerStats.SessionTracker;
-using ChatPlus.Core.Features.Stats.PlayerStats.StatsPrivacy;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Audio;
@@ -783,8 +783,8 @@ public static class PlayerInfoDrawer
         var privacy = PrivacyCache.Get(target.whoAmI);
         return privacy switch
         {
-            Config.Privacy.Everyone => true,
-            Config.Privacy.Team =>
+            Config.StatsPrivacyMode.Everyone => true,
+            Config.StatsPrivacyMode.Team =>
                 viewer != null && target != null &&
                 viewer.team != 0 && viewer.team == target.team,
             _ => viewer == target // NoOne: only yourself
