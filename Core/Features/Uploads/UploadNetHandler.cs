@@ -37,8 +37,14 @@ internal static class UploadNetHandler
 
     public static void Request(string key)
     {
-        if (string.IsNullOrWhiteSpace(key)) return;
-        if (Main.netMode != NetmodeID.MultiplayerClient) return;
+        if (string.IsNullOrWhiteSpace(key))
+            return;
+
+        if (Main.netMode != NetmodeID.MultiplayerClient)
+            return;
+
+        if (!UploadManager.UploadsAllowed())
+            return;
 
         var p = NewPacket(Msg.Request);
         p.Write(key);
@@ -55,6 +61,9 @@ internal static class UploadNetHandler
             {
                 case Msg.Request:
                     {
+                        if (!UploadManager.UploadsAllowed())
+                            break;
+
                         string key = reader.ReadString();
                         var p = NewPacket(Msg.Forward);
                         p.Write(key);
@@ -64,6 +73,9 @@ internal static class UploadNetHandler
                     }
                 case Msg.Chunk:
                     {
+                        if (!UploadManager.UploadsAllowed())
+                            break;
+
                         string key = reader.ReadString();
                         int total = reader.ReadInt32();
                         int index = reader.ReadInt32();

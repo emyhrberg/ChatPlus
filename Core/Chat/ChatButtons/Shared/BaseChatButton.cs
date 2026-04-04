@@ -72,7 +72,7 @@ internal abstract class BaseChatButton : UIElement
         //if (Math.Abs(Left.Pixels - pos.X) > 0.5f || Math.Abs(Top.Pixels - pos.Y) > 0.5f)
         {
             int yOffset = 0;
-            if (Conf.C.TypingIndicators == Config.TypingIndicatorsMode.NoOne)
+            if (Conf.C.TypingIndicators == ClientConfig.TypingIndicatorsMode.NoOne)
                 yOffset = 10;
 
             Left.Set(pos.X, 0f);

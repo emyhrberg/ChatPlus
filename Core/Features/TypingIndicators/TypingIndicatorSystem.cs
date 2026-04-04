@@ -13,6 +13,7 @@ using Terraria.GameContent.UI;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.UI.Chat;
+using static ChatPlus.Common.Configs.ServerConfig;
 
 namespace ChatPlus.Core.Features.TypingIndicators;
 
@@ -24,10 +25,25 @@ public class TypingIndicatorSystem : ModSystem
     // the fade value goes from 0 to 6 (6 frames to fully appear, 6 frames to fully disappear)
     private static readonly int[] fade = new int[Main.maxPlayers];
 
+    internal static ClientConfig.TypingIndicatorsMode GetTypingIndicatorsMode()
+    {
+        if (Main.netMode == NetmodeID.SinglePlayer)
+            return Conf.C.TypingIndicators;
+
+        return Conf.S.OverrideTypingIndicators switch
+        {
+            TypingIndicatorsOverrideMode.LetClientsDecide => Conf.C.TypingIndicators,
+            TypingIndicatorsOverrideMode.NoOne => ClientConfig.TypingIndicatorsMode.NoOne,
+            TypingIndicatorsOverrideMode.Team => ClientConfig.TypingIndicatorsMode.Team,
+            TypingIndicatorsOverrideMode.Everyone => ClientConfig.TypingIndicatorsMode.Everyone,
+            _ => ClientConfig.TypingIndicatorsMode.Everyone
+        };
+    }
+
     /// Draws the chat bubble above the players
     public override void PostDrawInterface(SpriteBatch sb)
     {
-        if (Conf.C.TypingIndicators == Config.TypingIndicatorsMode.NoOne)
+        if (GetTypingIndicatorsMode() == ClientConfig.TypingIndicatorsMode.NoOne)
         {
             return;
         }
@@ -131,7 +147,7 @@ public class TypingIndicatorSystem : ModSystem
     /// Draws the chat bubble just below the chat box
     public static void DrawTypingLine(int yOffset=0)
     {
-        if (Conf.C.TypingIndicators == Config.TypingIndicatorsMode.NoOne) return;
+        if (GetTypingIndicatorsMode() == ClientConfig.TypingIndicatorsMode.NoOne) return;
 
         // Show chatline ONLY for other players (never for myself).
         var otherTypers = TypingPlayers
@@ -215,19 +231,19 @@ public class TypingIndicatorSystem : ModSystem
 
     internal static bool CanSeeTyping(int viewerWho, int typerWho)
     {
-        var mode = Conf.C.TypingIndicators;
+        var mode = GetTypingIndicatorsMode();
 
-        if (mode == Config.TypingIndicatorsMode.NoOne)
+        if (mode == ClientConfig.TypingIndicatorsMode.NoOne)
             return false;
 
         if (viewerWho == typerWho)
             return false;
 
-        if (mode == Config.TypingIndicatorsMode.Everyone)
+        if (mode == ClientConfig.TypingIndicatorsMode.Everyone)
             return true;
 
         // Team
-        if (mode == Config.TypingIndicatorsMode.Team)
+        if (mode == ClientConfig.TypingIndicatorsMode.Team)
         {
             var v = Main.player[viewerWho];
             var t = Main.player[typerWho];

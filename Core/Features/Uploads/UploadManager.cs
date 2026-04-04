@@ -1,12 +1,13 @@
-﻿using System;
+﻿using ChatPlus.Common.Configs;
+using ChatPlus.Common.Debug;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using ChatPlus.Common.Debug;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.UI.Chat;
 
 namespace ChatPlus.Core.Features.Uploads;
 
@@ -14,6 +15,14 @@ namespace ChatPlus.Core.Features.Uploads;
 internal class UploadManager : ModSystem
 {
     public static List<Upload> Uploads { get; private set; } = [];
+
+    public static bool UploadsAllowed()
+    {
+        if (Main.netMode == NetmodeID.SinglePlayer)
+            return true;
+
+        return ModContent.GetInstance<ServerConfig>().AllowImageUploads;
+    }
 
     public override void PostSetupContent()
     {

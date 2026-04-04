@@ -26,7 +26,7 @@ internal static class PrivacyNetHandler
         packet.Send();
     }
 
-    public static void BroadcastSingle(int who, Config.StatsPrivacyMode privacy)
+    public static void BroadcastSingle(int who, ClientConfig.StatsPrivacyMode privacy)
     {
         if (Main.netMode != NetmodeID.Server) return;
 
@@ -61,7 +61,7 @@ internal static class PrivacyNetHandler
         if (op != Op.PrivacyUpdate) return;
 
         int playerId = reader.ReadByte();
-        var privacy = (Config.StatsPrivacyMode)reader.ReadByte();
+        var privacy = (ClientConfig.StatsPrivacyMode)reader.ReadByte();
 
         PrivacyCache.Set(playerId, privacy);
 

@@ -24,7 +24,7 @@ namespace ChatPlus.Common.Configs;
 /// <summary>
 /// Client-sided config.
 /// </summary>
-public class Config : ModConfig
+public class ClientConfig : ModConfig
 {
     #region Enums
     public enum StatsPrivacyMode
@@ -306,5 +306,13 @@ public class Config : ModConfig
 #endregion
 public static class Conf
 {
-    public static Config C => ModContent.GetInstance<Config>();
+    /// <summary>
+    /// Get an instance of the <see cref="ClientConfig"/>
+    /// </summary>
+    public static ClientConfig C => ModContent.GetInstance<ClientConfig>();
+
+    /// <summary>
+    /// Get an instance of the <see cref="ServerConfig"/>
+    /// </summary>
+    public static ServerConfig S => ModContent.GetInstance<ServerConfig>();
 }

@@ -8,7 +8,7 @@ using Terraria;
 using Terraria.GameContent;
 using Terraria.GameContent.UI.Chat;
 using Terraria.ModLoader;
-using static ChatPlus.Common.Configs.Config;
+using static ChatPlus.Common.Configs.ClientConfig;
 
 namespace ChatPlus.Core.Chat.ChatButtons.Shared;
 

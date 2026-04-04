@@ -32,12 +32,12 @@ public class PlayerIconsConfigElement : BaseBoolConfigElement
 
         try
         {
-            MapHeadRendererHook.shouldFlipHeadDraw = player.direction == -1;
+            FlipMapHeadRendererHook.shouldFlipHeadDraw = player.direction == -1;
             Main.MapPlayerRenderer.DrawPlayerHead(Main.Camera, player, pos, 1f, 0.75f, Color.White);
         }
         finally
         {
-            MapHeadRendererHook.shouldFlipHeadDraw = false;
+            FlipMapHeadRendererHook.shouldFlipHeadDraw = false;
         }
     }
 }

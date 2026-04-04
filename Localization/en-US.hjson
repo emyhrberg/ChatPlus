@@ -7,14 +7,13 @@ Mods: {
 		}
 
 		Configs: {
-			Config: {
+			ClientConfig: {
 				DisplayName: Client Config
 
 				Headers: {
-					Config: Config
 					ChatSettings: Chat Settings
 					ChatFormat: Chat Format
-					StatsViewer: Stats
+					StatsViewer: Stats Viewer
 					ShowButtons: Show Buttons
 					Preview: Preview
 				}
@@ -167,7 +166,7 @@ Mods: {
 
 				StatsPrivacy: {
 					Label: Stats Privacy
-					Tooltip: Determines who can see my stats
+					Tooltip: ""
 				}
 			}
 
@@ -205,17 +204,17 @@ Mods: {
 
 				NoOne: {
 					Label: No One
-					Tooltip: "Show no chat bubbles from anyone"
+					Tooltip: Show no chat bubbles from anyone
 				}
 
 				Team: {
 					Label: Team
-					Tooltip: "Show only chat bubbles from teammates"
+					Tooltip: Show only chat bubbles from teammates
 				}
 
 				Everyone: {
 					Label: Everyone
-					Tooltip: "Show chat bubbles from everyone"
+					Tooltip: Show chat bubbles from everyone
 				}
 			}
 
@@ -224,17 +223,60 @@ Mods: {
 
 				NoOne: {
 					Label: No One
-					Tooltip: "Only you can view your player stats"
+					Tooltip: Only you can view your player stats
 				}
 
 				Team: {
 					Label: Team
-					Tooltip: "Teammates can view your player stats"
+					Tooltip: Teammates can view your player stats
 				}
 
 				Everyone: {
 					Label: Everyone
-					Tooltip: "Everyone can view your player stats"
+					Tooltip: Everyone can view your player stats
+				}
+			}
+
+			ServerConfig: {
+				DisplayName: Server Config
+
+				Headers: {
+					Uploads: Uploads
+					TypingIndicators: Typing Indicators
+				}
+
+				AllowImageUploads: {
+					Label: Allow Image Uploads
+					Tooltip: Allows players to upload and send images in chat. Disable this to block image uploads for everyone on the server.
+				}
+
+				OverrideTypingIndicators: {
+					Label: Override Typing Indicators
+					Tooltip: Lets the server override each player's typing indicator setting.
+				}
+			}
+
+			TypingIndicatorsOverrideMode: {
+				Tooltip: Choose how typing indicators work on this server.
+
+				LetClientsDecide: {
+					Label: Let Clients Decide
+					Tooltip: Each player uses their own setting.
+				}
+
+				NoOne: {
+					Label: No One
+					Tooltip: Hides typing indicators for everyone.
+				}
+
+				Team: {
+					Label: Team
+					Tooltip: Shows typing indicators only to teammates.
+				}
+
+				Everyone: {
+					Label: Everyone
+					Tooltip: Shows typing indicators to everyone.
 				}
 			}
 		}

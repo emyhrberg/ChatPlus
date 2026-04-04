@@ -39,6 +39,9 @@ public sealed class UploadTagHandler : ITagHandler
 
         key = key.Trim().TrimEnd(']');
 
+        if (!UploadManager.UploadsAllowed())
+            return new TextSnippet("[uploads disabled]", Color.Gray);
+
         // Always return an UploadSnippet so it can start drawing as soon as the texture arrives.
         if (!Registry.ContainsKey(key) && Main.netMode != NetmodeID.SinglePlayer)
             UploadNetHandler.RequestOnce(key);

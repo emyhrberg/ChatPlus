@@ -3,7 +3,7 @@ using ChatPlus.Core.UI;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.GameContent;
 using Terraria.UI.Chat;
-using static ChatPlus.Common.Configs.Config;
+using static ChatPlus.Common.Configs.ClientConfig;
 
 namespace ChatPlus.Core.Features.Colors;
 public class ColorElement : BaseElement<ColorEntry>

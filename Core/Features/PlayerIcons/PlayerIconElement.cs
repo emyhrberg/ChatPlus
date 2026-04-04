@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.UI.Chat;
-using static ChatPlus.Common.Configs.Config;
+using static ChatPlus.Common.Configs.ClientConfig;
 
 namespace ChatPlus.Core.Features.PlayerIcons;
 

@@ -52,9 +52,9 @@ public class PlayerIconSnippet : TextSnippet
         //         _isGray ? grayscaleEffect.Value.Value : null,
         //         Main.UIScaleMatrix);
 
-        MapHeadRendererHook.shouldFlipHeadDraw = player.direction == -1;
+        FlipMapHeadRendererHook.shouldFlipHeadDraw = player.direction == -1;
         Main.MapPlayerRenderer.DrawPlayerHead(Main.Camera, player, drawPos, 1f, scale, Color.White);
-        MapHeadRendererHook.shouldFlipHeadDraw = false;
+        FlipMapHeadRendererHook.shouldFlipHeadDraw = false;
 
         //sb.End();
         //sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);

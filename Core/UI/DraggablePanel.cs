@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Input;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
 using Terraria.UI;
-using static ChatPlus.Common.Configs.Config;
+using static ChatPlus.Common.Configs.ClientConfig;
 
 namespace ChatPlus.Core.UI;
 

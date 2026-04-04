@@ -108,10 +108,10 @@ public class TimestampConfigElement<TEnum> : RangeElement where TEnum : struct, 
 
     private string GetLiveLabel(TEnum value)
     {
-        if (typeof(TEnum) == typeof(Config.TimestampSettings))
+        if (typeof(TEnum) == typeof(ClientConfig.TimestampSettings))
         {
-            var v = (Config.TimestampSettings)(object)value;
-            if (v == Config.TimestampSettings.Off) return "Off";
+            var v = (ClientConfig.TimestampSettings)(object)value;
+            if (v == ClientConfig.TimestampSettings.Off) return "Off";
 
             string fmt = "[" + GetFormat(v) + "]";
             return DateTime.Now.ToString(fmt);
@@ -120,21 +120,21 @@ public class TimestampConfigElement<TEnum> : RangeElement where TEnum : struct, 
         return value.ToString();
     }
 
-    private static string GetFormat(Config.TimestampSettings value)
+    private static string GetFormat(ClientConfig.TimestampSettings value)
     {
-        if (value == Config.TimestampSettings.HourAndMinute12Hours)
+        if (value == ClientConfig.TimestampSettings.HourAndMinute12Hours)
         {
             return "h:mm tt";
         }
-        if (value == Config.TimestampSettings.HourAndMinuteAndSeconds12Hours)
+        if (value == ClientConfig.TimestampSettings.HourAndMinuteAndSeconds12Hours)
         {
             return "h:mm:ss tt";
         }
-        if (value == Config.TimestampSettings.HourAndMinute24Hours)
+        if (value == ClientConfig.TimestampSettings.HourAndMinute24Hours)
         {
             return "HH:mm";
         }
-        if (value == Config.TimestampSettings.HourAndMinuteAndSeconds24Hours)
+        if (value == ClientConfig.TimestampSettings.HourAndMinuteAndSeconds24Hours)
         {
             return "HH:mm:ss";
         }

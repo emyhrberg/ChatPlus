@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.UI;
-using static ChatPlus.Common.Configs.Config;
+using static ChatPlus.Common.Configs.ClientConfig;
 
 namespace ChatPlus.Core.Chat.ChatButtons;
 

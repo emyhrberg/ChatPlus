@@ -108,10 +108,10 @@ public static class PlayerInfoDrawer
         if (!HasAccess(Main.LocalPlayer, player))
         {
             Vector2 lockPos = pos + new Vector2(105, 65);
-            MapHeadRendererHook.shouldFlipHeadDraw = player.direction == -1;
+            FlipMapHeadRendererHook.shouldFlipHeadDraw = player.direction == -1;
             Main.MapPlayerRenderer.DrawPlayerHead(Main.Camera, player, lockPos,
                 1f, 1.5f, Color.White);
-            MapHeadRendererHook.shouldFlipHeadDraw = false;
+            FlipMapHeadRendererHook.shouldFlipHeadDraw = false;
             DrawLock(sb, lockPos + new Vector2(-36, -15), 4f);
             return;
         }
@@ -783,8 +783,8 @@ public static class PlayerInfoDrawer
         var privacy = PrivacyCache.Get(target.whoAmI);
         return privacy switch
         {
-            Config.StatsPrivacyMode.Everyone => true,
-            Config.StatsPrivacyMode.Team =>
+            ClientConfig.StatsPrivacyMode.Everyone => true,
+            ClientConfig.StatsPrivacyMode.Team =>
                 viewer != null && target != null &&
                 viewer.team != 0 && viewer.team == target.team,
             _ => viewer == target // NoOne: only yourself

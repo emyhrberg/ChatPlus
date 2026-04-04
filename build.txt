@@ -1,6 +1,7 @@
 displayName = Chat+
 side = both
 author = Erky
-version = 1.5.1
+version = 1.5.4
 buildIgnore = .git\*, bin\*, obj\*, Assets\Workshop\*, Assets\NotoEmoji
 sortAfter = ChitterChatter, ChatImprover
+weakReferences = DragonLens

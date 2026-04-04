@@ -10,7 +10,7 @@ namespace ChatPlus.Core.Features.PlayerIcons;
 /// Modifies the DrawPlayerHead method in the MapHeadRenderer class to force the player head icon to be drawn facing right.
 /// The default behaviour is to draw the head icon facing the direction of the player, so this is overriding that.
 /// </summary>
-public class MapHeadRendererHook : ModSystem
+public class FlipMapHeadRendererHook : ModSystem
 {
     public static bool shouldFlipHeadDraw = true;
 
@@ -31,7 +31,7 @@ public class MapHeadRendererHook : ModSystem
 
             ILLabel skipCentering = il.DefineLabel();
 
-            c.EmitLdsfld(typeof(MapHeadRendererHook).GetField(nameof(shouldFlipHeadDraw)));
+            c.EmitLdsfld(typeof(FlipMapHeadRendererHook).GetField(nameof(shouldFlipHeadDraw)));
             c.EmitBrfalse(skipCentering);
             c.EmitDelegate<Func<Vector2, Vector2>>(inCenter =>
             {
@@ -42,7 +42,7 @@ public class MapHeadRendererHook : ModSystem
 
             // find where the draw data loads the 
             c.GotoNext(MoveType.After, i => i.MatchLdcI4(0));
-            c.EmitLdsfld(typeof(MapHeadRendererHook).GetField(nameof(shouldFlipHeadDraw)));
+            c.EmitLdsfld(typeof(FlipMapHeadRendererHook).GetField(nameof(shouldFlipHeadDraw)));
             c.EmitXor();
         }
         catch (Exception e)

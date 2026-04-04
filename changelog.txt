@@ -1,7 +1,2 @@
-﻿v1.5:
-- Fixed uploads to work better in MP
-- Fixed links to register and work properly
-- Fixed/removed inaccurate buff timer in player viewer
-- Fixed inaccurate background biome drawing in player viewer
-- Fixed show stats when hovering config option so it no longer opens states when it shouldn't
-- Added team config option for typing indicators
+﻿v1.5.4:
+- Added server option to override typing indicators
